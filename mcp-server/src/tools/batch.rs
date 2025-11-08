@@ -34,7 +34,7 @@ pub async fn batch_archive_photos(
     let restore = restore.unwrap_or(false);
     let action = if restore { "Restoring" } else { "Archiving" };
 
-    ctx.info(&format!("{} {} photos...", action, photo_uids.len()))
+    let _ = ctx.info(&format!("{} {} photos...", action, photo_uids.len()))
         .await;
 
     let mut results = Vec::new();
@@ -48,13 +48,13 @@ pub async fn batch_archive_photos(
 
         match client.post::<(), serde_json::Value>(&path, &()).await {
             Ok(_) => {
-                ctx.info(&format!("Successfully {} photo: {}", action.to_lowercase(), uid))
+                let _ = ctx.info(&format!("Successfully {} photo: {}", action.to_lowercase(), uid))
                     .await;
                 results.push(BatchItemResult::success(uid, None));
             }
             Err(e) => {
                 let error_msg = format!("Failed to {} photo: {}", action.to_lowercase(), e);
-                ctx.error(&format!("Error for {}: {}", uid, error_msg))
+                let _ = ctx.error(&format!("Error for {}: {}", uid, error_msg))
                     .await;
                 results.push(BatchItemResult::error(uid, None, error_msg));
             }
@@ -66,7 +66,7 @@ pub async fn batch_archive_photos(
         Some(format!("Batch {} operation completed", action.to_lowercase())),
     );
 
-    ctx.info(&format!(
+    let _ = ctx.info(&format!(
         "Batch operation complete: {} succeeded, {} failed",
         response.summary.success_count, response.summary.error_count
     ))
@@ -116,7 +116,7 @@ pub async fn batch_delete_photos(
 
     let permanent = permanent.unwrap_or(false);
 
-    ctx.warn(&format!(
+    let _ = ctx.warn(&format!(
         "⚠️  {} deleting {} photos...",
         if permanent { "Permanently" } else { "Soft" },
         photo_uids.len()
@@ -134,13 +134,13 @@ pub async fn batch_delete_photos(
 
         match client.delete(&path).await {
             Ok(_) => {
-                ctx.info(&format!("Successfully deleted photo: {}", uid))
+                let _ = ctx.info(&format!("Successfully deleted photo: {}", uid))
                     .await;
                 results.push(BatchItemResult::success(uid, None));
             }
             Err(e) => {
                 let error_msg = format!("Failed to delete photo: {}", e);
-                ctx.error(&format!("Error for {}: {}", uid, error_msg))
+                let _ = ctx.error(&format!("Error for {}: {}", uid, error_msg))
                     .await;
                 results.push(BatchItemResult::error(uid, None, error_msg));
             }
@@ -152,7 +152,7 @@ pub async fn batch_delete_photos(
         Some("Batch delete operation completed".to_string()),
     );
 
-    ctx.info(&format!(
+    let _ = ctx.info(&format!(
         "Batch delete complete: {} succeeded, {} failed",
         response.summary.success_count, response.summary.error_count
     ))
@@ -193,7 +193,7 @@ pub async fn batch_favorite_photos(
     let unfavorite = unfavorite.unwrap_or(false);
     let action = if unfavorite { "Unfavoriting" } else { "Favoriting" };
 
-    ctx.info(&format!("{} {} photos...", action, photo_uids.len()))
+    let _ = ctx.info(&format!("{} {} photos...", action, photo_uids.len()))
         .await;
 
     let mut results = Vec::new();
@@ -209,13 +209,13 @@ pub async fn batch_favorite_photos(
 
         match result {
             Ok(_) => {
-                ctx.info(&format!("Successfully {} photo: {}", action.to_lowercase(), uid))
+                let _ = ctx.info(&format!("Successfully {} photo: {}", action.to_lowercase(), uid))
                     .await;
                 results.push(BatchItemResult::success(uid, None));
             }
             Err(e) => {
                 let error_msg = format!("Failed to {} photo: {}", action.to_lowercase(), e);
-                ctx.error(&format!("Error for {}: {}", uid, error_msg))
+                let _ = ctx.error(&format!("Error for {}: {}", uid, error_msg))
                     .await;
                 results.push(BatchItemResult::error(uid, None, error_msg));
             }
@@ -227,7 +227,7 @@ pub async fn batch_favorite_photos(
         Some(format!("Batch {} operation completed", action.to_lowercase())),
     );
 
-    ctx.info(&format!(
+    let _ = ctx.info(&format!(
         "Batch operation complete: {} succeeded, {} failed",
         response.summary.success_count, response.summary.error_count
     ))
@@ -267,7 +267,7 @@ pub async fn batch_private_photos(
     let make_public = make_public.unwrap_or(false);
     let action = if make_public { "Making public" } else { "Making private" };
 
-    ctx.info(&format!("{} {} photos...", action, photo_uids.len()))
+    let _ = ctx.info(&format!("{} {} photos...", action, photo_uids.len()))
         .await;
 
     let mut results = Vec::new();
@@ -285,13 +285,13 @@ pub async fn batch_private_photos(
 
         match client.put::<PrivacyUpdate, serde_json::Value>(&path, &update).await {
             Ok(_) => {
-                ctx.info(&format!("Successfully {} photo: {}", action.to_lowercase(), uid))
+                let _ = ctx.info(&format!("Successfully {} photo: {}", action.to_lowercase(), uid))
                     .await;
                 results.push(BatchItemResult::success(uid, None));
             }
             Err(e) => {
                 let error_msg = format!("Failed to {} photo: {}", action.to_lowercase(), e);
-                ctx.error(&format!("Error for {}: {}", uid, error_msg))
+                let _ = ctx.error(&format!("Error for {}: {}", uid, error_msg))
                     .await;
                 results.push(BatchItemResult::error(uid, None, error_msg));
             }
@@ -303,7 +303,7 @@ pub async fn batch_private_photos(
         Some(format!("{} operation completed", action)),
     );
 
-    ctx.info(&format!(
+    let _ = ctx.info(&format!(
         "Batch operation complete: {} succeeded, {} failed",
         response.summary.success_count, response.summary.error_count
     ))
@@ -348,7 +348,7 @@ pub async fn batch_update_photos(
         ));
     }
 
-    ctx.info(&format!("Updating {} photos...", photo_uids.len()))
+    let _ = ctx.info(&format!("Updating {} photos...", photo_uids.len()))
         .await;
 
     let mut results = Vec::new();
@@ -371,13 +371,13 @@ pub async fn batch_update_photos(
 
         match client.put::<PhotoUpdate, serde_json::Value>(&path, &update).await {
             Ok(_) => {
-                ctx.info(&format!("Successfully updated photo: {}", uid))
+                let _ = ctx.info(&format!("Successfully updated photo: {}", uid))
                     .await;
                 results.push(BatchItemResult::success(uid, None));
             }
             Err(e) => {
                 let error_msg = format!("Failed to update photo: {}", e);
-                ctx.error(&format!("Error for {}: {}", uid, error_msg))
+                let _ = ctx.error(&format!("Error for {}: {}", uid, error_msg))
                     .await;
                 results.push(BatchItemResult::error(uid, None, error_msg));
             }
@@ -389,7 +389,7 @@ pub async fn batch_update_photos(
         Some("Batch update operation completed".to_string()),
     );
 
-    ctx.info(&format!(
+    let _ = ctx.info(&format!(
         "Batch update complete: {} succeeded, {} failed",
         response.summary.success_count, response.summary.error_count
     ))

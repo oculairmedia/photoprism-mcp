@@ -34,10 +34,7 @@ impl PhotoTools {
         let photo = self.client
             .get_photo(&uid)
             .await
-            .map_err(|e| {
-                ctx.error(&format!("Failed to get photo: {}", e));
-                McpError::internal(format!("Photo not found: {}", e))
-            })?;
+            .map_err(|e| McpError::internal(format!("Photo not found: {}", e)))?;
 
         Ok(serde_json::to_string_pretty(&photo)?)
     }
@@ -58,10 +55,7 @@ impl PhotoTools {
         let photo = self.client
             .update_photo(&uid, &updates)
             .await
-            .map_err(|e| {
-                ctx.error(&format!("Failed to update photo: {}", e));
-                McpError::internal(format!("Failed to update photo: {}", e))
-            })?;
+            .map_err(|e| McpError::internal(format!("Failed to update photo: {}", e)))?;
 
         ctx.info(&format!("Photo {} updated successfully", uid)).await?;
 
@@ -83,10 +77,7 @@ impl PhotoTools {
         self.client
             .delete_photo(&uid)
             .await
-            .map_err(|e| {
-                ctx.error(&format!("Failed to delete photo: {}", e));
-                McpError::internal(format!("Delete failed: {}", e))
-            })?;
+            .map_err(|e| McpError::internal(format!("Delete failed: {}", e)))?;
 
         Ok(format!("Photo {} deleted successfully", uid))
     }

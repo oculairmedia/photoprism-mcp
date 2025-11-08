@@ -20,10 +20,7 @@ impl AlbumTools {
         let albums = self.client
             .list_albums()
             .await
-            .map_err(|e| {
-                ctx.error(&format!("Failed to list albums: {}", e));
-                McpError::internal(format!("Failed to list albums: {}", e))
-            })?;
+            .map_err(|e| McpError::internal(format!("Failed to list albums: {}", e)))?;
 
         ctx.info(&format!("Found {} albums", albums.len())).await?;
 
@@ -45,10 +42,7 @@ impl AlbumTools {
         let album = self.client
             .get_album(&uid)
             .await
-            .map_err(|e| {
-                ctx.error(&format!("Failed to get album: {}", e));
-                McpError::internal(format!("Album not found: {}", e))
-            })?;
+            .map_err(|e| McpError::internal(format!("Album not found: {}", e)))?;
 
         Ok(serde_json::to_string_pretty(&album)?)
     }
@@ -75,10 +69,7 @@ impl AlbumTools {
         let album = self.client
             .create_album(&create)
             .await
-            .map_err(|e| {
-                ctx.error(&format!("Failed to create album: {}", e));
-                McpError::internal(format!("Album creation failed: {}", e))
-            })?;
+            .map_err(|e| McpError::internal(format!("Album creation failed: {}", e)))?;
 
         ctx.info(&format!("Album created with UID: {}", album.uid)).await?;
 
@@ -101,10 +92,7 @@ impl AlbumTools {
         let album = self.client
             .update_album(&uid, &updates)
             .await
-            .map_err(|e| {
-                ctx.error(&format!("Failed to update album: {}", e));
-                McpError::internal(format!("Failed to update album: {}", e))
-            })?;
+            .map_err(|e| McpError::internal(format!("Failed to update album: {}", e)))?;
 
         ctx.info(&format!("Album {} updated successfully", uid)).await?;
 
@@ -126,10 +114,7 @@ impl AlbumTools {
         self.client
             .delete_album(&uid)
             .await
-            .map_err(|e| {
-                ctx.error(&format!("Failed to delete album: {}", e));
-                McpError::internal(format!("Delete failed: {}", e))
-            })?;
+            .map_err(|e| McpError::internal(format!("Delete failed: {}", e)))?;
 
         Ok(format!("Album {} deleted successfully", uid))
     }
@@ -158,10 +143,7 @@ impl AlbumTools {
         self.client
             .add_photos_to_album(&album_uid, &photo_uids)
             .await
-            .map_err(|e| {
-                ctx.error(&format!("Failed to add photos to album: {}", e));
-                McpError::internal(format!("Failed to add photos: {}", e))
-            })?;
+            .map_err(|e| McpError::internal(format!("Failed to add photos: {}", e)))?;
 
         Ok(format!(
             "Successfully added {} photos to album {}",
