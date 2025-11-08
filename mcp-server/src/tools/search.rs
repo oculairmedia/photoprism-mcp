@@ -26,10 +26,7 @@ impl SearchTools {
         let photos = self.client
             .search_photos(&query, count)
             .await
-            .map_err(|e| {
-                ctx.error(&format!("Search failed: {}", e));
-                McpError::internal(format!("Search failed: {}", e))
-            })?;
+            .map_err(|e| McpError::internal(format!("Search failed: {}", e)))?;
 
         ctx.info(&format!("Found {} matching photos", photos.len())).await?;
 

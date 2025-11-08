@@ -20,10 +20,7 @@ impl LabelTools {
         let labels = self.client
             .list_labels()
             .await
-            .map_err(|e| {
-                ctx.error(&format!("Failed to list labels: {}", e));
-                McpError::internal(format!("Failed to list labels: {}", e))
-            })?;
+            .map_err(|e| McpError::internal(format!("Failed to list labels: {}", e)))?;
 
         ctx.info(&format!("Found {} labels", labels.len())).await?;
 
@@ -49,10 +46,7 @@ impl LabelTools {
         let photos = self.client
             .get_photos_by_label(&label, count)
             .await
-            .map_err(|e| {
-                ctx.error(&format!("Failed to get photos by label: {}", e));
-                McpError::internal(format!("Failed to get photos by label: {}", e))
-            })?;
+            .map_err(|e| McpError::internal(format!("Failed to get photos by label: {}", e)))?;
 
         ctx.info(&format!("Found {} photos with label '{}'", photos.len(), label)).await?;
 

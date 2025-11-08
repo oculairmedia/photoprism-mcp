@@ -20,10 +20,7 @@ impl SubjectTools {
         let subjects = self.client
             .list_subjects()
             .await
-            .map_err(|e| {
-                ctx.error(&format!("Failed to list subjects: {}", e));
-                McpError::internal(format!("Failed to list subjects: {}", e))
-            })?;
+            .map_err(|e| McpError::internal(format!("Failed to list subjects: {}", e)))?;
 
         ctx.info(&format!("Found {} subjects", subjects.len())).await?;
 
@@ -49,10 +46,7 @@ impl SubjectTools {
         let photos = self.client
             .get_photos_by_subject(&subject_uid, count)
             .await
-            .map_err(|e| {
-                ctx.error(&format!("Failed to get photos by subject: {}", e));
-                McpError::internal(format!("Failed to get photos by subject: {}", e))
-            })?;
+            .map_err(|e| McpError::internal(format!("Failed to get photos by subject: {}", e)))?;
 
         ctx.info(&format!("Found {} photos with subject '{}'", photos.len(), subject_uid)).await?;
 

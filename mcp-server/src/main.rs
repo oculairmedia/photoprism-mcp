@@ -39,8 +39,8 @@ async fn main() -> Result<()> {
 
     tracing::info!("Starting PhotoPrism MCP server with STDIO transport");
 
-    // The #[server] macro generates the run method
-    server.run().await
+    // Run server with STDIO transport
+    server.run_stdio().await
         .map_err(|e| anyhow::anyhow!("Server failed: {}", e))?;
 
     Ok(())

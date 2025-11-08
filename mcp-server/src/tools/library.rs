@@ -19,10 +19,7 @@ impl LibraryTools {
         let status = self.client
             .get_status()
             .await
-            .map_err(|e| {
-                ctx.error(&format!("Failed to get status: {}", e));
-                McpError::internal(format!("Failed to get status: {}", e))
-            })?;
+            .map_err(|e| McpError::internal(format!("Failed to get status: {}", e)))?;
 
         Ok(serde_json::to_string_pretty(&status)?)
     }
