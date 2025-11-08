@@ -87,3 +87,8 @@ Thumbs.db
 .c9revisions
 .settings
 .swp
+
+# Rust build artifacts
+/target/
+**/target/
+Cargo.lock
