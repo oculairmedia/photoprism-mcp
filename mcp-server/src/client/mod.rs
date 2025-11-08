@@ -115,7 +115,7 @@ impl PhotoPrismClient {
     }
 
     /// Make an authenticated POST request
-    async fn post<T: Serialize, R: for<'de> Deserialize<'de>>(
+    pub async fn post<T: Serialize, R: for<'de> Deserialize<'de>>(
         &self,
         path: &str,
         body: &T,
@@ -140,7 +140,7 @@ impl PhotoPrismClient {
     }
 
     /// Make an authenticated PUT request
-    async fn put<T: Serialize, R: for<'de> Deserialize<'de>>(
+    pub async fn put<T: Serialize, R: for<'de> Deserialize<'de>>(
         &self,
         path: &str,
         body: &T,
@@ -165,7 +165,7 @@ impl PhotoPrismClient {
     }
 
     /// Make an authenticated DELETE request
-    async fn delete(&self, path: &str) -> Result<()> {
+    pub async fn delete(&self, path: &str) -> Result<()> {
         let token = self.ensure_authenticated().await?;
         let url = format!("{}{}", self.base_url, path);
 

@@ -304,6 +304,66 @@ impl PhotoPrismServer {
         Ok(serde_json::to_string_pretty(&status)?)
     }
 
+    // Batch operation tools
+
+    /// Archive or restore multiple photos in batch
+    #[tool("Archive or restore multiple photos in batch (max 100 photos per operation)")]
+    async fn batch_archive_photos(
+        &self,
+        ctx: Context,
+        photo_uids: Vec<String>,
+        restore: Option<bool>,
+    ) -> McpResult<String> {
+        crate::tools::batch::batch_archive_photos(&self.client, ctx, photo_uids, restore).await
+    }
+
+    /// Delete multiple photos in batch
+    #[tool("Delete multiple photos in batch - PERMANENT operation with safety confirmation required (max 50 photos)")]
+    async fn batch_delete_photos(
+        &self,
+        ctx: Context,
+        photo_uids: Vec<String>,
+        confirm: bool,
+        permanent: Option<bool>,
+    ) -> McpResult<String> {
+        crate::tools::batch::batch_delete_photos(&self.client, ctx, photo_uids, confirm, permanent).await
+    }
+
+    /// Mark multiple photos as favorite or unfavorite
+    #[tool("Mark multiple photos as favorite or unfavorite in batch (max 100 photos)")]
+    async fn batch_favorite_photos(
+        &self,
+        ctx: Context,
+        photo_uids: Vec<String>,
+        unfavorite: Option<bool>,
+    ) -> McpResult<String> {
+        crate::tools::batch::batch_favorite_photos(&self.client, ctx, photo_uids, unfavorite).await
+    }
+
+    /// Make multiple photos private or public
+    #[tool("Make multiple photos private or public in batch (max 100 photos)")]
+    async fn batch_private_photos(
+        &self,
+        ctx: Context,
+        photo_uids: Vec<String>,
+        make_public: Option<bool>,
+    ) -> McpResult<String> {
+        crate::tools::batch::batch_private_photos(&self.client, ctx, photo_uids, make_public).await
+    }
+
+    /// Update metadata for multiple photos in batch
+    #[tool("Update title, description, or tags for multiple photos in batch (max 50 photos)")]
+    async fn batch_update_photos(
+        &self,
+        ctx: Context,
+        photo_uids: Vec<String>,
+        title: Option<String>,
+        description: Option<String>,
+        add_tags: Option<Vec<String>>,
+    ) -> McpResult<String> {
+        crate::tools::batch::batch_update_photos(&self.client, ctx, photo_uids, title, description, add_tags).await
+    }
+
     // Resources
 
     /// Recent photos
