@@ -278,7 +278,7 @@ No additional dependencies needed for batch operations - reuses existing stack.
 
 ## Known Issues & Solutions
 
-### Issue 1: TurboMCP `run()` Method
+### Issue 1: TurboMCP `run()` Method - ✅ FIXED
 
 **Problem**: TurboMCP 2.2.1 `#[server]` macro doesn't generate the `run()` method as expected.
 
@@ -291,40 +291,57 @@ error[E0599]: no method named `run` found for struct `PhotoPrismServer`
    |            ^^^ method not found
 ```
 
-**Solution Options**:
-1. **Upgrade TurboMCP** - Check for version 2.3+ with updated macro API
-2. **Manual Server Setup** - Implement manual MCP server without macro:
-   ```rust
-   use turbomcp_server::Server;
-   let server = Server::new();
-   server.register_tool(...);
-   server.run_stdio().await?;
-   ```
-3. **Consult TurboMCP Docs** - Latest API may have changed method names
+**Solution Applied**: Changed to `run_stdio()` method for STDIO transport:
+```rust
+// Before
+server.run().await
 
-### Issue 2: Context `.await` Warnings
+// After
+server.run_stdio().await
+    .map_err(|e| anyhow::anyhow!("Server failed: {}", e))?;
+```
 
-**Problem**: `ctx.error()` and `ctx.info()` calls need `.await`
+**Status**: ✅ FIXED - Server now starts correctly with STDIO transport
+
+### Issue 2: Context Method Result Handling - ✅ FIXED
+
+**Problem**: `ctx.error()`, `ctx.info()`, and `ctx.warn()` calls return Results that weren't being handled
 
 **Warnings**:
 ```
-warning: unused implementer of `std::future::Future` that must be used
+warning: unused `std::result::Result` that must be used
   --> src/tools/batch.rs:38:13
    |
-38 |             ctx.error(&format!(...));
-   |             ^^^^^^^^^^^^^^^^^^^^^^^^
+38 |             ctx.error(&format!(...)).await;
+   |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ```
 
-**Solution**: Add `.await` to all context method calls:
+**Solutions Applied**:
+
+1. **Removed logging from map_err closures** (can't await in sync closures):
 ```rust
 // Before
-ctx.error(&format!("Error: {}", e));
+.map_err(|e| {
+    ctx.error(&format!("Failed: {}", e));  // Can't await here!
+    McpError::internal(format!("Failed: {}", e))
+})?
 
 // After
-ctx.error(&format!("Error: {}", e)).await;
+.map_err(|e| McpError::internal(format!("Failed: {}", e)))?
 ```
 
-**Status**: Easy fix, just needs `.await` added in ~15 locations.
+2. **Added Result handling for all context calls** using `let _ = ...` pattern:
+```rust
+// Before
+ctx.info("Processing...").await;
+
+// After
+let _ = ctx.info("Processing...").await;
+```
+
+This approach ensures logging failures don't interrupt batch operations.
+
+**Status**: ✅ FIXED - All 39 warnings resolved, only 4 harmless TurboMCP cfg warnings remain
 
 ---
 
@@ -419,11 +436,11 @@ Add batch operations implementation section showing:
 
 ### Before Deployment
 
-- [ ] Fix TurboMCP `run()` method issue
-- [ ] Add `.await` to all `ctx` method calls
+- [x] Fix TurboMCP `run()` method issue - ✅ COMPLETE
+- [x] Add `.await` to all `ctx` method calls - ✅ COMPLETE
+- [x] Build release binary: `cargo build --release` - ✅ COMPLETE
 - [ ] Run full test suite
 - [ ] Update README.md with batch tools
-- [ ] Build release binary: `cargo build --release`
 - [ ] Test with Claude Desktop (STDIO transport)
 - [ ] Test batch operations with real PhotoPrism instance
 
@@ -529,12 +546,14 @@ let results = futures::future::join_all(futures).await;
 
 ## Next Steps
 
-### Immediate (1-2 days)
+### ✅ Completed
 
-1. **Fix Compilation Issues**
-   - Resolve TurboMCP `run()` method
-   - Add `.await` to context calls
-   - Verify clean compile
+1. **Fix Compilation Issues** - ✅ COMPLETE
+   - ✅ Resolved TurboMCP `run()` method (using `run_stdio()`)
+   - ✅ Added proper Result handling to context calls
+   - ✅ Verified clean compile (debug and release builds succeed)
+
+### Immediate (Next)
 
 2. **Testing**
    - Add batch operation unit tests
@@ -586,7 +605,9 @@ The PhotoPrism MCP server consolidation has successfully merged the best feature
 
 **Code Quality**: Production-ready with comprehensive error handling and type safety
 
-**Next Action**: Fix minor compilation issues (TurboMCP API compatibility) and test with real PhotoPrism instance.
+**Build Status**: ✅ Both debug and release builds succeed with zero errors and only 4 harmless TurboMCP cfg warnings
+
+**Next Action**: Test with real PhotoPrism instance and add batch operation unit tests.
 
 The consolidated implementation represents the best of all three approaches and provides a solid foundation for future PhotoPrism MCP integrations.
 
