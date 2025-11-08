@@ -1,5 +1,10 @@
 # Multi-stage build for PhotoPrism MCP Server
 
+# Build arguments
+ARG BUILDTIME
+ARG VERSION
+ARG REVISION
+
 # Build stage
 FROM rust:1.75-slim as builder
 
@@ -32,6 +37,11 @@ RUN cargo build --release
 # Runtime stage
 FROM debian:bookworm-slim
 
+# Pass build args to runtime
+ARG BUILDTIME
+ARG VERSION
+ARG REVISION
+
 # Install runtime dependencies
 RUN apt-get update && \
     apt-get install -y ca-certificates && \
@@ -39,6 +49,16 @@ RUN apt-get update && \
 
 # Copy binary from builder
 COPY --from=builder /app/target/release/photoprism-mcp /usr/local/bin/
+
+# Add metadata labels
+LABEL org.opencontainers.image.title="PhotoPrism MCP Server"
+LABEL org.opencontainers.image.description="Model Context Protocol server for PhotoPrism API integration"
+LABEL org.opencontainers.image.version="${VERSION}"
+LABEL org.opencontainers.image.created="${BUILDTIME}"
+LABEL org.opencontainers.image.revision="${REVISION}"
+LABEL org.opencontainers.image.source="https://github.com/oculairmedia/photoprism-mcp"
+LABEL org.opencontainers.image.licenses="MIT"
+LABEL org.opencontainers.image.vendor="OculairMedia"
 
 # Set environment variables with defaults
 ENV PHOTOPRISM_URL=http://localhost:2342

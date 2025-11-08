@@ -1,8 +1,48 @@
+# Build artifacts
 target/
+**/*.rs.bk
+*.pdb
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Git
 .git/
 .gitignore
+.gitattributes
+
+# Documentation (except README)
 *.md
 !README.md
+docs/
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+.travis.yml
+
+# Docker
+Dockerfile
+.dockerignore
+docker-compose.yml
 .env
-.vscode/
-.idea/
+.env.*
+!.env.example
+
+# Test data
+test-data/
+examples/
+benches/
+
+# Misc
+*.log
+*.tmp
+.cache/

@@ -1,0 +1,86 @@
+version: '3.8'
+
+services:
+  photoprism-mcp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - BUILDTIME=${BUILDTIME:-now}
+        - VERSION=${VERSION:-dev}
+        - REVISION=${REVISION:-local}
+    image: photoprism-mcp:local
+    container_name: photoprism-mcp
+    environment:
+      # PhotoPrism connection settings
+      - PHOTOPRISM_URL=${PHOTOPRISM_URL:-http://photoprism:2342}
+      - PHOTOPRISM_USERNAME=${PHOTOPRISM_USERNAME:-admin}
+      - PHOTOPRISM_PASSWORD=${PHOTOPRISM_PASSWORD}
+
+      # Transport mode: stdio, http, tcp, websocket
+      - TRANSPORT=${TRANSPORT:-stdio}
+
+      # Optional: Logging level
+      - RUST_LOG=${RUST_LOG:-info}
+
+    # For STDIO mode (default for MCP)
+    stdin_open: true
+    tty: true
+
+    # Uncomment for HTTP mode
+    # ports:
+    #   - "3000:3000"
+
+    # Restart policy
+    restart: unless-stopped
+
+    # Resource limits
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 512M
+        reservations:
+          cpus: '0.5'
+          memory: 256M
+
+  # Optional: Include PhotoPrism for testing
+  photoprism:
+    image: photoprism/photoprism:latest
+    container_name: photoprism-test
+    restart: unless-stopped
+    security_opt:
+      - seccomp:unconfined
+      - apparmor:unconfined
+    ports:
+      - "2342:2342"
+    environment:
+      PHOTOPRISM_ADMIN_PASSWORD: ${PHOTOPRISM_PASSWORD:-insecure}
+      PHOTOPRISM_AUTH_MODE: "password"
+      PHOTOPRISM_SITE_URL: "http://localhost:2342/"
+      PHOTOPRISM_ORIGINALS_LIMIT: 5000
+      PHOTOPRISM_HTTP_COMPRESSION: "gzip"
+      PHOTOPRISM_LOG_LEVEL: "info"
+      PHOTOPRISM_READONLY: "false"
+      PHOTOPRISM_EXPERIMENTAL: "false"
+      PHOTOPRISM_DISABLE_CHOWN: "false"
+      PHOTOPRISM_DISABLE_WEBDAV: "false"
+      PHOTOPRISM_DISABLE_SETTINGS: "false"
+      PHOTOPRISM_DISABLE_TENSORFLOW: "false"
+      PHOTOPRISM_DISABLE_FACES: "false"
+      PHOTOPRISM_DISABLE_CLASSIFICATION: "false"
+      PHOTOPRISM_DISABLE_RAW: "false"
+      PHOTOPRISM_RAW_PRESETS: "false"
+      PHOTOPRISM_JPEG_QUALITY: 85
+      PHOTOPRISM_DETECT_NSFW: "false"
+      PHOTOPRISM_UPLOAD_NSFW: "true"
+    working_dir: "/photoprism"
+    volumes:
+      - "./test-data/originals:/photoprism/originals"
+      - "./test-data/storage:/photoprism/storage"
+    profiles:
+      - testing
+
+networks:
+  default:
+    name: photoprism-mcp-network
