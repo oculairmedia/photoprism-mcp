@@ -1,6 +1,6 @@
+use crate::error::{PhotoPrismError, Result};
 use serde::{Deserialize, Serialize};
 use std::path::PathBuf;
-use crate::error::{PhotoPrismError, Result};
 
 /// Configuration for PhotoPrism MCP Server
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -25,9 +25,7 @@ impl Config {
     pub fn load() -> Result<Self> {
         // Try loading from ~/.config/photoprism-mcp/config.yaml
         if let Some(config_dir) = dirs::config_dir() {
-            let config_path = config_dir
-                .join("photoprism-mcp")
-                .join("config.yaml");
+            let config_path = config_dir.join("photoprism-mcp").join("config.yaml");
 
             if config_path.exists() {
                 let contents = std::fs::read_to_string(&config_path)?;
@@ -36,16 +34,16 @@ impl Config {
         }
 
         // Fallback to environment variables
-        let base_url = std::env::var("PHOTOPRISM_URL")
-            .unwrap_or_else(|_| "http://localhost:2342".to_string());
+        let base_url =
+            std::env::var("PHOTOPRISM_URL").unwrap_or_else(|_| "http://localhost:2342".to_string());
 
-        let username = std::env::var("PHOTOPRISM_USERNAME")
-            .unwrap_or_else(|_| "admin".to_string());
+        let username = std::env::var("PHOTOPRISM_USERNAME").unwrap_or_else(|_| "admin".to_string());
 
-        let password = std::env::var("PHOTOPRISM_PASSWORD")
-            .map_err(|_| PhotoPrismError::ConfigError(
-                "PHOTOPRISM_PASSWORD environment variable not set".to_string()
-            ))?;
+        let password = std::env::var("PHOTOPRISM_PASSWORD").map_err(|_| {
+            PhotoPrismError::ConfigError(
+                "PHOTOPRISM_PASSWORD environment variable not set".to_string(),
+            )
+        })?;
 
         Ok(Self {
             base_url,
@@ -72,10 +70,9 @@ impl Config {
 
     /// Save configuration to file (without password)
     pub fn save(&self) -> Result<()> {
-        let config_dir = Self::config_dir()
-            .ok_or_else(|| PhotoPrismError::ConfigError(
-                "Cannot find config directory".to_string()
-            ))?;
+        let config_dir = Self::config_dir().ok_or_else(|| {
+            PhotoPrismError::ConfigError("Cannot find config directory".to_string())
+        })?;
 
         std::fs::create_dir_all(&config_dir)?;
 

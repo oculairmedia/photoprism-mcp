@@ -1,8 +1,8 @@
-use std::sync::Arc;
-use turbomcp::prelude::*;
 use crate::client::PhotoPrismClient;
 use crate::config::Config;
 use crate::types::*;
+use std::sync::Arc;
+use turbomcp::prelude::*;
 
 /// Main PhotoPrism MCP Server
 #[derive(Clone)]
@@ -11,10 +11,7 @@ pub struct PhotoPrismServer {
     client: Arc<PhotoPrismClient>,
 }
 
-#[turbomcp::server(
-    name = "photoprism",
-    version = "0.1.0"
-)]
+#[turbomcp::server(name = "photoprism", version = "0.1.0")]
 impl PhotoPrismServer {
     /// Create a new PhotoPrism MCP server
     pub fn new(config: Config) -> Result<Self, anyhow::Error> {
@@ -33,18 +30,15 @@ impl PhotoPrismServer {
 
     /// Get photo details by UID
     #[tool("Get photo details by UID")]
-    async fn get_photo(
-        &self,
-        ctx: Context,
-        uid: String,
-    ) -> McpResult<String> {
+    async fn get_photo(&self, ctx: Context, uid: String) -> McpResult<String> {
         if uid.is_empty() || uid.len() != 16 {
             return Err(McpError::invalid_request("Invalid photo UID"));
         }
 
         ctx.info(&format!("Fetching photo: {}", uid)).await?;
 
-        let photo = self.client
+        let photo = self
+            .client
             .get_photo(&uid)
             .await
             .map_err(|e| McpError::internal(format!("Photo not found: {}", e)))?;
@@ -75,7 +69,8 @@ impl PhotoPrismServer {
             private: None,
         };
 
-        let photo = self.client
+        let photo = self
+            .client
             .update_photo(&uid, &updates)
             .await
             .map_err(|e| McpError::internal(format!("Update failed: {}", e)))?;
@@ -95,7 +90,8 @@ impl PhotoPrismServer {
 
         ctx.info(&format!("Searching photos: '{}'", query)).await?;
 
-        let photos = self.client
+        let photos = self
+            .client
             .search_photos(&query, count)
             .await
             .map_err(|e| McpError::internal(format!("Search failed: {}", e)))?;
@@ -112,7 +108,8 @@ impl PhotoPrismServer {
     async fn list_albums(&self, ctx: Context) -> McpResult<String> {
         ctx.info("Fetching all albums").await?;
 
-        let albums = self.client
+        let albums = self
+            .client
             .list_albums()
             .await
             .map_err(|e| McpError::internal(format!("Failed to list albums: {}", e)))?;
@@ -124,18 +121,15 @@ impl PhotoPrismServer {
 
     /// Get album details by UID
     #[tool("Get album details by UID")]
-    async fn get_album(
-        &self,
-        ctx: Context,
-        uid: String,
-    ) -> McpResult<String> {
+    async fn get_album(&self, ctx: Context, uid: String) -> McpResult<String> {
         if uid.is_empty() {
             return Err(McpError::invalid_request("Album UID cannot be empty"));
         }
 
         ctx.info(&format!("Fetching album: {}", uid)).await?;
 
-        let album = self.client
+        let album = self
+            .client
             .get_album(&uid)
             .await
             .map_err(|e| McpError::internal(format!("Album not found: {}", e)))?;
@@ -163,7 +157,8 @@ impl PhotoPrismServer {
             favorite: false,
         };
 
-        let album = self.client
+        let album = self
+            .client
             .create_album(&create)
             .await
             .map_err(|e| McpError::internal(format!("Album creation failed: {}", e)))?;
@@ -193,7 +188,8 @@ impl PhotoPrismServer {
             "Adding {} photos to album {}",
             photo_uids.len(),
             album_uid
-        )).await?;
+        ))
+        .await?;
 
         self.client
             .add_photos_to_album(&album_uid, &photo_uids)
@@ -214,7 +210,8 @@ impl PhotoPrismServer {
     async fn list_labels(&self, ctx: Context) -> McpResult<String> {
         ctx.info("Fetching all labels").await?;
 
-        let labels = self.client
+        let labels = self
+            .client
             .list_labels()
             .await
             .map_err(|e| McpError::internal(format!("Failed to list labels: {}", e)))?;
@@ -238,9 +235,11 @@ impl PhotoPrismServer {
             return Err(McpError::invalid_request("Label name cannot be empty"));
         }
 
-        ctx.info(&format!("Fetching photos with label: '{}'", label)).await?;
+        ctx.info(&format!("Fetching photos with label: '{}'", label))
+            .await?;
 
-        let photos = self.client
+        let photos = self
+            .client
             .get_photos_by_label(&label, count)
             .await
             .map_err(|e| McpError::internal(format!("Failed to get photos: {}", e)))?;
@@ -255,12 +254,14 @@ impl PhotoPrismServer {
     async fn list_subjects(&self, ctx: Context) -> McpResult<String> {
         ctx.info("Fetching all subjects").await?;
 
-        let subjects = self.client
+        let subjects = self
+            .client
             .list_subjects()
             .await
             .map_err(|e| McpError::internal(format!("Failed to list subjects: {}", e)))?;
 
-        ctx.info(&format!("Found {} subjects", subjects.len())).await?;
+        ctx.info(&format!("Found {} subjects", subjects.len()))
+            .await?;
 
         Ok(serde_json::to_string_pretty(&subjects)?)
     }
@@ -279,9 +280,11 @@ impl PhotoPrismServer {
             return Err(McpError::invalid_request("Subject UID cannot be empty"));
         }
 
-        ctx.info(&format!("Fetching photos for subject: {}", subject_uid)).await?;
+        ctx.info(&format!("Fetching photos for subject: {}", subject_uid))
+            .await?;
 
-        let photos = self.client
+        let photos = self
+            .client
             .get_photos_by_subject(&subject_uid, count)
             .await
             .map_err(|e| McpError::internal(format!("Failed to get photos: {}", e)))?;
@@ -296,7 +299,8 @@ impl PhotoPrismServer {
     async fn get_status(&self, ctx: Context) -> McpResult<String> {
         ctx.info("Fetching library status").await?;
 
-        let status = self.client
+        let status = self
+            .client
             .get_status()
             .await
             .map_err(|e| McpError::internal(format!("Failed to get status: {}", e)))?;
@@ -326,7 +330,8 @@ impl PhotoPrismServer {
         confirm: bool,
         permanent: Option<bool>,
     ) -> McpResult<String> {
-        crate::tools::batch::batch_delete_photos(&self.client, ctx, photo_uids, confirm, permanent).await
+        crate::tools::batch::batch_delete_photos(&self.client, ctx, photo_uids, confirm, permanent)
+            .await
     }
 
     /// Mark multiple photos as favorite or unfavorite
@@ -361,7 +366,15 @@ impl PhotoPrismServer {
         description: Option<String>,
         add_tags: Option<Vec<String>>,
     ) -> McpResult<String> {
-        crate::tools::batch::batch_update_photos(&self.client, ctx, photo_uids, title, description, add_tags).await
+        crate::tools::batch::batch_update_photos(
+            &self.client,
+            ctx,
+            photo_uids,
+            title,
+            description,
+            add_tags,
+        )
+        .await
     }
 
     // Resources
@@ -369,7 +382,8 @@ impl PhotoPrismServer {
     /// Recent photos
     #[resource("photoprism://photos/recent")]
     async fn recent_photos(&self) -> McpResult<String> {
-        let photos = self.client
+        let photos = self
+            .client
             .search_photos("", 20)
             .await
             .map_err(|e| McpError::internal(format!("Failed to fetch recent photos: {}", e)))?;
@@ -380,7 +394,8 @@ impl PhotoPrismServer {
     /// Favorite photos
     #[resource("photoprism://photos/favorites")]
     async fn favorite_photos(&self) -> McpResult<String> {
-        let photos = self.client
+        let photos = self
+            .client
             .search_photos("favorite:true", 100)
             .await
             .map_err(|e| McpError::internal(format!("Failed to fetch favorites: {}", e)))?;
@@ -391,7 +406,8 @@ impl PhotoPrismServer {
     /// All albums
     #[resource("photoprism://albums/list")]
     async fn albums_list(&self) -> McpResult<String> {
-        let albums = self.client
+        let albums = self
+            .client
             .list_albums()
             .await
             .map_err(|e| McpError::internal(format!("Failed to fetch albums: {}", e)))?;
@@ -402,7 +418,8 @@ impl PhotoPrismServer {
     /// System status
     #[resource("photoprism://system/status")]
     async fn system_status(&self) -> McpResult<String> {
-        let status = self.client
+        let status = self
+            .client
             .get_status()
             .await
             .map_err(|e| McpError::internal(format!("Failed to fetch status: {}", e)))?;

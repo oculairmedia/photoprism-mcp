@@ -1,9 +1,9 @@
-pub mod photo;
 pub mod album;
-pub mod common;
 pub mod batch;
+pub mod common;
+pub mod photo;
 
-pub use photo::*;
 pub use album::*;
-pub use common::*;
 pub use batch::*;
+pub use common::*;
+pub use photo::*;

@@ -1,6 +1,6 @@
-use turbomcp::prelude::*;
 use crate::client::PhotoPrismClient;
 use std::sync::Arc;
+use turbomcp::prelude::*;
 
 /// Label tool handlers
 pub struct LabelTools {
@@ -17,7 +17,8 @@ impl LabelTools {
     pub async fn list_labels(&self, ctx: Context) -> McpResult<String> {
         ctx.info("Fetching all labels from PhotoPrism").await?;
 
-        let labels = self.client
+        let labels = self
+            .client
             .list_labels()
             .await
             .map_err(|e| McpError::internal(format!("Failed to list labels: {}", e)))?;
@@ -41,14 +42,21 @@ impl LabelTools {
             return Err(McpError::invalid_request("Label name cannot be empty"));
         }
 
-        ctx.info(&format!("Fetching photos with label '{}'", label)).await?;
+        ctx.info(&format!("Fetching photos with label '{}'", label))
+            .await?;
 
-        let photos = self.client
+        let photos = self
+            .client
             .get_photos_by_label(&label, count)
             .await
             .map_err(|e| McpError::internal(format!("Failed to get photos by label: {}", e)))?;
 
-        ctx.info(&format!("Found {} photos with label '{}'", photos.len(), label)).await?;
+        ctx.info(&format!(
+            "Found {} photos with label '{}'",
+            photos.len(),
+            label
+        ))
+        .await?;
 
         Ok(serde_json::to_string_pretty(&photos)?)
     }

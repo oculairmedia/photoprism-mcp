@@ -1,9 +1,9 @@
-use reqwest::{Client, header};
+use crate::error::{PhotoPrismError, Result};
+use crate::types::*;
+use reqwest::{header, Client};
 use serde::{Deserialize, Serialize};
 use std::sync::Arc;
 use tokio::sync::RwLock;
-use crate::error::{PhotoPrismError, Result};
-use crate::types::*;
 
 /// PhotoPrism API client
 pub struct PhotoPrismClient {
@@ -16,11 +16,7 @@ pub struct PhotoPrismClient {
 
 impl PhotoPrismClient {
     /// Create a new PhotoPrism API client
-    pub fn new(
-        base_url: String,
-        username: String,
-        password: String,
-    ) -> Result<Self> {
+    pub fn new(base_url: String, username: String, password: String) -> Result<Self> {
         let http_client = Client::builder()
             .timeout(std::time::Duration::from_secs(30))
             .build()
@@ -58,7 +54,8 @@ impl PhotoPrismClient {
         }
 
         let login_url = format!("{}/api/v1/session", self.base_url);
-        let response = self.http_client
+        let response = self
+            .http_client
             .post(&login_url)
             .json(&LoginRequest {
                 username: self.username.clone(),
@@ -68,9 +65,10 @@ impl PhotoPrismClient {
             .await?;
 
         if !response.status().is_success() {
-            return Err(PhotoPrismError::AuthenticationFailed(
-                format!("Authentication failed: {}", response.status())
-            ));
+            return Err(PhotoPrismError::AuthenticationFailed(format!(
+                "Authentication failed: {}",
+                response.status()
+            )));
         }
 
         let login_response: LoginResponse = response.json().await?;
@@ -86,14 +84,12 @@ impl PhotoPrismClient {
     }
 
     /// Make an authenticated GET request
-    async fn get<T: for<'de> Deserialize<'de>>(
-        &self,
-        path: &str,
-    ) -> Result<T> {
+    async fn get<T: for<'de> Deserialize<'de>>(&self, path: &str) -> Result<T> {
         let token = self.ensure_authenticated().await?;
         let url = format!("{}{}", self.base_url, path);
 
-        let response = self.http_client
+        let response = self
+            .http_client
             .get(&url)
             .header(header::AUTHORIZATION, format!("Bearer {}", token))
             .send()
@@ -102,13 +98,15 @@ impl PhotoPrismClient {
         if !response.status().is_success() {
             let status = response.status();
             if status == 404 {
-                return Err(PhotoPrismError::NotFound(
-                    format!("Resource not found: {}", path)
-                ));
+                return Err(PhotoPrismError::NotFound(format!(
+                    "Resource not found: {}",
+                    path
+                )));
             }
-            return Err(PhotoPrismError::ApiError(
-                format!("Request failed: {}", status)
-            ));
+            return Err(PhotoPrismError::ApiError(format!(
+                "Request failed: {}",
+                status
+            )));
         }
 
         Ok(response.json().await?)
@@ -123,7 +121,8 @@ impl PhotoPrismClient {
         let token = self.ensure_authenticated().await?;
         let url = format!("{}{}", self.base_url, path);
 
-        let response = self.http_client
+        let response = self
+            .http_client
             .post(&url)
             .header(header::AUTHORIZATION, format!("Bearer {}", token))
             .json(body)
@@ -131,9 +130,10 @@ impl PhotoPrismClient {
             .await?;
 
         if !response.status().is_success() {
-            return Err(PhotoPrismError::ApiError(
-                format!("Request failed: {}", response.status())
-            ));
+            return Err(PhotoPrismError::ApiError(format!(
+                "Request failed: {}",
+                response.status()
+            )));
         }
 
         Ok(response.json().await?)
@@ -148,7 +148,8 @@ impl PhotoPrismClient {
         let token = self.ensure_authenticated().await?;
         let url = format!("{}{}", self.base_url, path);
 
-        let response = self.http_client
+        let response = self
+            .http_client
             .put(&url)
             .header(header::AUTHORIZATION, format!("Bearer {}", token))
             .json(body)
@@ -156,9 +157,10 @@ impl PhotoPrismClient {
             .await?;
 
         if !response.status().is_success() {
-            return Err(PhotoPrismError::ApiError(
-                format!("Request failed: {}", response.status())
-            ));
+            return Err(PhotoPrismError::ApiError(format!(
+                "Request failed: {}",
+                response.status()
+            )));
         }
 
         Ok(response.json().await?)
@@ -169,16 +171,18 @@ impl PhotoPrismClient {
         let token = self.ensure_authenticated().await?;
         let url = format!("{}{}", self.base_url, path);
 
-        let response = self.http_client
+        let response = self
+            .http_client
             .delete(&url)
             .header(header::AUTHORIZATION, format!("Bearer {}", token))
             .send()
             .await?;
 
         if !response.status().is_success() {
-            return Err(PhotoPrismError::ApiError(
-                format!("Request failed: {}", response.status())
-            ));
+            return Err(PhotoPrismError::ApiError(format!(
+                "Request failed: {}",
+                response.status()
+            )));
         }
 
         Ok(())
@@ -187,11 +191,7 @@ impl PhotoPrismClient {
     // Photo operations
 
     /// Search photos
-    pub async fn search_photos(
-        &self,
-        query: &str,
-        count: u32,
-    ) -> Result<Vec<Photo>> {
+    pub async fn search_photos(&self, query: &str, count: u32) -> Result<Vec<Photo>> {
         let path = format!("/api/v1/photos?q={}&count={}", query, count);
         self.get(&path).await
     }
@@ -203,11 +203,7 @@ impl PhotoPrismClient {
     }
 
     /// Update photo metadata
-    pub async fn update_photo(
-        &self,
-        uid: &str,
-        updates: &PhotoUpdate,
-    ) -> Result<Photo> {
+    pub async fn update_photo(&self, uid: &str, updates: &PhotoUpdate) -> Result<Photo> {
         let path = format!("/api/v1/photos/{}", uid);
         self.put(&path, updates).await
     }
@@ -239,11 +235,7 @@ impl PhotoPrismClient {
     }
 
     /// Update album
-    pub async fn update_album(
-        &self,
-        uid: &str,
-        updates: &AlbumUpdate,
-    ) -> Result<Album> {
+    pub async fn update_album(&self, uid: &str, updates: &AlbumUpdate) -> Result<Album> {
         let path = format!("/api/v1/albums/{}", uid);
         self.put(&path, updates).await
     }
@@ -255,11 +247,7 @@ impl PhotoPrismClient {
     }
 
     /// Add photos to album
-    pub async fn add_photos_to_album(
-        &self,
-        album_uid: &str,
-        photo_uids: &[String],
-    ) -> Result<()> {
+    pub async fn add_photos_to_album(&self, album_uid: &str, photo_uids: &[String]) -> Result<()> {
         let path = format!("/api/v1/albums/{}/photos", album_uid);
 
         #[derive(Serialize)]
@@ -267,9 +255,14 @@ impl PhotoPrismClient {
             photos: Vec<String>,
         }
 
-        let _: serde_json::Value = self.post(&path, &AddPhotosRequest {
-            photos: photo_uids.to_vec(),
-        }).await?;
+        let _: serde_json::Value = self
+            .post(
+                &path,
+                &AddPhotosRequest {
+                    photos: photo_uids.to_vec(),
+                },
+            )
+            .await?;
 
         Ok(())
     }

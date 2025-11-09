@@ -1,6 +1,6 @@
-use turbomcp::prelude::*;
 use crate::client::PhotoPrismClient;
 use std::sync::Arc;
+use turbomcp::prelude::*;
 
 /// Library management tool handlers
 pub struct LibraryTools {
@@ -16,7 +16,8 @@ impl LibraryTools {
     pub async fn get_status(&self, ctx: Context) -> McpResult<String> {
         ctx.info("Fetching library status").await?;
 
-        let status = self.client
+        let status = self
+            .client
             .get_status()
             .await
             .map_err(|e| McpError::internal(format!("Failed to get status: {}", e)))?;
