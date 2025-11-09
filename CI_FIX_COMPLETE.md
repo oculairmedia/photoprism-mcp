@@ -113,3 +113,36 @@ develop → main
 **Date**: 2025-11-08  
 **Status**: ✅ READY FOR MERGE  
 **Branch**: claude/cicd-docker-workflows-011CUw5iXyMLPtETKCnTCCyc
+
+---
+
+## Update: Cargo.lock Fix (2025-11-08)
+
+### Additional Issue Found
+**Problem**: Docker build failed with `"/Cargo.lock": not found`  
+**Root Cause**: `Cargo.lock` was gitignored and not available in Docker build context
+
+### Fix Applied
+**Commit**: 598b91129
+
+1. **Updated `.gitignore`**: Removed `Cargo.lock` from ignore list
+2. **Committed `Cargo.lock`**: Added 89KB file to repository
+3. **Rationale**: Binary crates should commit `Cargo.lock` for reproducible builds
+
+### Why This Matters
+For Rust **libraries**, `Cargo.lock` is typically gitignored.  
+For Rust **binaries/applications** (like this MCP server), `Cargo.lock` should be committed to:
+- Ensure reproducible builds across environments
+- Lock dependency versions for production stability
+- Enable Docker builds without network dependency resolution
+
+### Total Commits: 6
+1. c547de328 - Fix Docker build and clippy warnings
+2. 4fabeda8f - Add Docker build fix summary documentation
+3. 73b1f6470 - Fix formatting: remove trailing blank line
+4. d2fcc1caf - Fix clippy warnings in test files
+5. 146c920bd - Add CI fix completion summary
+6. **598b91129 - Add Cargo.lock to repository** ← NEW
+
+### Status
+✅ **ALL ISSUES RESOLVED** - Docker build should now succeed on GitHub Actions
