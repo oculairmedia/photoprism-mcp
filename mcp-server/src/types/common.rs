@@ -80,7 +80,9 @@ pub struct SystemStatus {
 /// Sort order options
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "lowercase")]
+#[derive(Default)]
 pub enum SortOrder {
+    #[default]
     Newest,
     Oldest,
     Name,
@@ -88,8 +90,3 @@ pub enum SortOrder {
     Duration,
 }
 
-impl Default for SortOrder {
-    fn default() -> Self {
-        SortOrder::Newest
-    }
-}

@@ -20,7 +20,7 @@ impl PhotoPrismClient {
         let http_client = Client::builder()
             .timeout(std::time::Duration::from_secs(30))
             .build()
-            .map_err(|e| PhotoPrismError::NetworkError(e))?;
+            .map_err(PhotoPrismError::NetworkError)?;
 
         Ok(Self {
             http_client,
@@ -219,7 +219,7 @@ impl PhotoPrismClient {
     /// List all albums
     pub async fn list_albums(&self) -> Result<Vec<Album>> {
         let path = "/api/v1/albums?count=1000";
-        self.get(&path).await
+        self.get(path).await
     }
 
     /// Get album by UID
@@ -231,7 +231,7 @@ impl PhotoPrismClient {
     /// Create a new album
     pub async fn create_album(&self, create: &AlbumCreate) -> Result<Album> {
         let path = "/api/v1/albums";
-        self.post(&path, create).await
+        self.post(path, create).await
     }
 
     /// Update album
@@ -272,7 +272,7 @@ impl PhotoPrismClient {
     /// List all labels
     pub async fn list_labels(&self) -> Result<Vec<Label>> {
         let path = "/api/v1/labels?count=1000";
-        self.get(&path).await
+        self.get(path).await
     }
 
     /// Get photos by label
@@ -286,7 +286,7 @@ impl PhotoPrismClient {
     /// List all subjects (people)
     pub async fn list_subjects(&self) -> Result<Vec<Subject>> {
         let path = "/api/v1/subjects?count=1000";
-        self.get(&path).await
+        self.get(path).await
     }
 
     /// Get photos by subject
@@ -307,7 +307,7 @@ impl PhotoPrismClient {
             edition: String,
         }
 
-        let status: StatusResponse = self.get(&path).await?;
+        let status: StatusResponse = self.get(path).await?;
 
         // Get counts from different endpoints
         let photos: Vec<Photo> = self.get("/api/v1/photos?count=0").await.unwrap_or_default();

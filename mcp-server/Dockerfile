@@ -6,7 +6,8 @@ ARG VERSION
 ARG REVISION
 
 # Build stage
-FROM rust:1.75-slim as builder
+# Using latest stable Rust to support Cargo.lock version 4 and edition2024
+FROM rust:latest as builder
 
 WORKDIR /app
 
