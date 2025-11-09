@@ -1,6 +1,7 @@
 use anyhow::Result;
 use photoprism_mcp::{Config, PhotoPrismServer};
 use tracing_subscriber::EnvFilter;
+use std::env;
 
 #[tokio::main]
 async fn main() -> Result<()> {
@@ -37,11 +38,44 @@ async fn main() -> Result<()> {
     // Create and run server
     let server = PhotoPrismServer::new(config)?;
 
-    tracing::info!("Starting PhotoPrism MCP server with STDIO transport");
-
-    // Run server with STDIO transport
-    server.run_stdio().await
-        .map_err(|e| anyhow::anyhow!("Server failed: {}", e))?;
+    // Determine transport mode from environment variable
+    let transport = env::var("TRANSPORT").unwrap_or_else(|_| "stdio".to_string());
+    
+    match transport.to_lowercase().as_str() {
+        "http" => {
+            let port = env::var("HTTP_PORT").unwrap_or_else(|_| "3000".to_string());
+            let addr = format!("0.0.0.0:{}", port);
+            tracing::info!("🚀 Starting HTTP transport");
+            tracing::info!("📡 Listening on: http://{}", addr);
+            tracing::info!("🔗 Endpoint: http://{}/mcp", addr);
+            tracing::info!("Ready for MCP client connections");
+            
+            // Use turbomcp_transport streamable HTTP with permissive security for development
+            use turbomcp_transport::streamable_http_v2::{StreamableHttpConfigBuilder, run_server};
+            use std::sync::Arc;
+            use std::time::Duration;
+            
+            let config = StreamableHttpConfigBuilder::new()
+                .with_bind_address(&addr)
+                .allow_any_origin(true)  // Allow any origin in development mode
+                .allow_localhost(true)
+                .with_rate_limit(1_000_000, Duration::from_secs(60))  // Very high limit for development
+                .build();
+            
+            run_server(config, Arc::new(server))
+                .await
+                .map_err(|e| anyhow::anyhow!("HTTP server failed: {}", e))?;
+        }
+        _ => {
+            tracing::info!("🚀 Starting STDIO transport");
+            tracing::info!("Ready for MCP client connections");
+            
+            server
+                .run_stdio()
+                .await
+                .map_err(|e| anyhow::anyhow!("STDIO server failed: {}", e))?;
+        }
+    }
 
     Ok(())
 }

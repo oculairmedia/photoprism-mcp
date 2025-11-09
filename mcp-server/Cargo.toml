@@ -11,6 +11,7 @@ repository = "https://github.com/photoprism/photoprism"
 # MCP Framework
 turbomcp = "2.2.1"
 turbomcp-protocol = "2.2.1"
+turbomcp-transport = { version = "2.2.1", features = ["http"] }
 
 # Async Runtime
 tokio = { version = "1.47", features = ["full"] }
