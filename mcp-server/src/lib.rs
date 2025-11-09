@@ -1,3 +1,6 @@
+// Allow TurboMCP framework cfg warnings
+#![allow(unexpected_cfgs)]
+
 pub mod client;
 pub mod config;
 pub mod error;
