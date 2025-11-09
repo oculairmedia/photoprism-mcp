@@ -140,7 +140,7 @@ async fn test_get_photo() {
     let photo = result.unwrap();
     assert_eq!(photo.uid, "abc123def4567890");
     assert_eq!(photo.title, "Test Photo");
-    assert_eq!(photo.favorite, true);
+    assert!(photo.favorite);
 }
 
 #[tokio::test]
@@ -221,7 +221,7 @@ async fn test_list_albums() {
     let albums = result.unwrap();
     assert_eq!(albums.len(), 2);
     assert_eq!(albums[0].title, "Vacation 2024");
-    assert_eq!(albums[0].favorite, true);
+    assert!(albums[0].favorite);
     assert_eq!(albums[1].title, "Family");
 }
 
@@ -368,5 +368,5 @@ async fn test_list_subjects() {
     let subjects = result.unwrap();
     assert_eq!(subjects.len(), 2);
     assert_eq!(subjects[0].name, "John Doe");
-    assert_eq!(subjects[0].favorite, true);
+    assert!(subjects[0].favorite);
 }

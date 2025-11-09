@@ -107,7 +107,7 @@ mod type_tests {
     fn test_sort_order_default() {
         let sort = SortOrder::default();
         match sort {
-            SortOrder::Newest => assert!(true),
+            SortOrder::Newest => {} // Correct default
             _ => panic!("Default should be Newest"),
         }
     }
