@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  photoprism-mcp:
+    build:
+      context: ./mcp-server
+      dockerfile: Dockerfile
+    container_name: photoprism-mcp
+    ports:
+      - "3005:3005"
+    environment:
+      - TRANSPORT=http
+      - HTTP_PORT=3005
+      - PHOTOPRISM_URL=${PHOTOPRISM_URL:-http://localhost:2342}
+      - PHOTOPRISM_USERNAME=${PHOTOPRISM_USERNAME:-admin}
+      - PHOTOPRISM_PASSWORD=${PHOTOPRISM_PASSWORD:-changeme}
+      - RUST_LOG=info
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3005/mcp"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
