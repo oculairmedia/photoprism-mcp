@@ -111,6 +111,7 @@ jobs:
 
       - name: Generate artifact attestation
         uses: actions/attest-build-provenance@v1
+        continue-on-error: true  # Optional security feature, don't fail workflow
         with:
           subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           subject-digest: ${{ steps.build.outputs.digest }}
