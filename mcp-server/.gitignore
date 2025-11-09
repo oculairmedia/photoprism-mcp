@@ -1,7 +1,7 @@
 # Rust
 /target
 **/*.rs.bk
-Cargo.lock
+# Cargo.lock is committed for binary crates to ensure reproducible builds
 
 # IDE
 .vscode/
