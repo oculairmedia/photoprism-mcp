@@ -1,5 +1,5 @@
-use serde::{Deserialize, Serialize};
 use schemars::JsonSchema;
+use serde::{Deserialize, Serialize};
 
 /// Common search parameters
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
@@ -80,16 +80,12 @@ pub struct SystemStatus {
 /// Sort order options
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "lowercase")]
+#[derive(Default)]
 pub enum SortOrder {
+    #[default]
     Newest,
     Oldest,
     Name,
     Size,
     Duration,
-}
-
-impl Default for SortOrder {
-    fn default() -> Self {
-        SortOrder::Newest
-    }
 }

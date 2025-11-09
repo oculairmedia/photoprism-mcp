@@ -1,6 +1,6 @@
-use turbomcp::prelude::*;
 use crate::client::PhotoPrismClient;
 use std::sync::Arc;
+use turbomcp::prelude::*;
 
 /// Album resource handlers
 pub struct AlbumResources {
@@ -15,7 +15,8 @@ impl AlbumResources {
     /// List all albums
     /// URI: photoprism://albums/list
     pub async fn list_albums(&self) -> McpResult<String> {
-        let albums = self.client
+        let albums = self
+            .client
             .list_albums()
             .await
             .map_err(|e| McpError::internal(format!("Failed to fetch albums: {}", e)))?;
@@ -30,7 +31,8 @@ impl AlbumResources {
             return Err(McpError::invalid_request("Album UID cannot be empty"));
         }
 
-        let album = self.client
+        let album = self
+            .client
             .get_album(&uid)
             .await
             .map_err(|e| McpError::internal(format!("Album not found: {}", e)))?;
@@ -41,15 +43,13 @@ impl AlbumResources {
     /// Get favorite albums
     /// URI: photoprism://albums/favorites
     pub async fn favorite_albums(&self) -> McpResult<String> {
-        let all_albums = self.client
+        let all_albums = self
+            .client
             .list_albums()
             .await
             .map_err(|e| McpError::internal(format!("Failed to fetch albums: {}", e)))?;
 
-        let favorites: Vec<_> = all_albums
-            .into_iter()
-            .filter(|a| a.favorite)
-            .collect();
+        let favorites: Vec<_> = all_albums.into_iter().filter(|a| a.favorite).collect();
 
         Ok(serde_json::to_string_pretty(&favorites)?)
     }

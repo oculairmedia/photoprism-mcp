@@ -6,7 +6,8 @@ async fn test_authentication_success() {
     let mut server = Server::new_async().await;
 
     // Mock successful authentication
-    let _auth_mock = server.mock("POST", "/api/v1/session")
+    let _auth_mock = server
+        .mock("POST", "/api/v1/session")
         .with_status(200)
         .with_header("content-type", "application/json")
         .with_body(r#"{"id":"test-session-token-12345"}"#)
@@ -27,7 +28,8 @@ async fn test_authentication_failure() {
     let mut server = Server::new_async().await;
 
     // Mock failed authentication
-    let _auth_mock = server.mock("POST", "/api/v1/session")
+    let _auth_mock = server
+        .mock("POST", "/api/v1/session")
         .with_status(401)
         .with_header("content-type", "application/json")
         .with_body(r#"{"error":"invalid credentials"}"#)
@@ -38,7 +40,8 @@ async fn test_authentication_failure() {
         server.url(),
         "test_user".to_string(),
         "wrong_password".to_string(),
-    ).expect("Client creation should succeed");
+    )
+    .expect("Client creation should succeed");
 
     // Try to search photos (which will trigger authentication)
     let result = client.search_photos("test", 10).await;
@@ -50,7 +53,8 @@ async fn test_search_photos() {
     let mut server = Server::new_async().await;
 
     // Mock authentication
-    let _auth_mock = server.mock("POST", "/api/v1/session")
+    let _auth_mock = server
+        .mock("POST", "/api/v1/session")
         .with_status(200)
         .with_header("content-type", "application/json")
         .with_body(r#"{"id":"test-token"}"#)
@@ -58,10 +62,12 @@ async fn test_search_photos() {
         .await;
 
     // Mock search endpoint
-    let _search_mock = server.mock("GET", "/api/v1/photos?q=sunset&count=10")
+    let _search_mock = server
+        .mock("GET", "/api/v1/photos?q=sunset&count=10")
         .with_status(200)
         .with_header("content-type", "application/json")
-        .with_body(r#"[
+        .with_body(
+            r#"[
             {
                 "UID": "abc123def4567890",
                 "Title": "Beautiful Sunset",
@@ -74,15 +80,13 @@ async fn test_search_photos() {
                 "Width": 1920,
                 "Height": 1080
             }
-        ]"#)
+        ]"#,
+        )
         .create_async()
         .await;
 
-    let client = PhotoPrismClient::new(
-        server.url(),
-        "test".to_string(),
-        "test".to_string(),
-    ).unwrap();
+    let client =
+        PhotoPrismClient::new(server.url(), "test".to_string(), "test".to_string()).unwrap();
 
     let result = client.search_photos("sunset", 10).await;
     assert!(result.is_ok());
@@ -97,7 +101,8 @@ async fn test_get_photo() {
     let mut server = Server::new_async().await;
 
     // Mock authentication
-    let _auth_mock = server.mock("POST", "/api/v1/session")
+    let _auth_mock = server
+        .mock("POST", "/api/v1/session")
         .with_status(200)
         .with_header("content-type", "application/json")
         .with_body(r#"{"id":"test-token"}"#)
@@ -105,10 +110,12 @@ async fn test_get_photo() {
         .await;
 
     // Mock get photo endpoint
-    let _get_mock = server.mock("GET", "/api/v1/photos/abc123def4567890")
+    let _get_mock = server
+        .mock("GET", "/api/v1/photos/abc123def4567890")
         .with_status(200)
         .with_header("content-type", "application/json")
-        .with_body(r#"{
+        .with_body(
+            r#"{
             "UID": "abc123def4567890",
             "Title": "Test Photo",
             "Description": "A test photo",
@@ -119,15 +126,13 @@ async fn test_get_photo() {
             "Hash": "hash456",
             "Width": 2048,
             "Height": 1536
-        }"#)
+        }"#,
+        )
         .create_async()
         .await;
 
-    let client = PhotoPrismClient::new(
-        server.url(),
-        "test".to_string(),
-        "test".to_string(),
-    ).unwrap();
+    let client =
+        PhotoPrismClient::new(server.url(), "test".to_string(), "test".to_string()).unwrap();
 
     let result = client.get_photo("abc123def4567890").await;
     assert!(result.is_ok());
@@ -135,7 +140,7 @@ async fn test_get_photo() {
     let photo = result.unwrap();
     assert_eq!(photo.uid, "abc123def4567890");
     assert_eq!(photo.title, "Test Photo");
-    assert_eq!(photo.favorite, true);
+    assert!(photo.favorite);
 }
 
 #[tokio::test]
@@ -143,7 +148,8 @@ async fn test_get_photo_not_found() {
     let mut server = Server::new_async().await;
 
     // Mock authentication
-    let _auth_mock = server.mock("POST", "/api/v1/session")
+    let _auth_mock = server
+        .mock("POST", "/api/v1/session")
         .with_status(200)
         .with_header("content-type", "application/json")
         .with_body(r#"{"id":"test-token"}"#)
@@ -151,18 +157,16 @@ async fn test_get_photo_not_found() {
         .await;
 
     // Mock 404 response
-    let _get_mock = server.mock("GET", "/api/v1/photos/nonexistent123")
+    let _get_mock = server
+        .mock("GET", "/api/v1/photos/nonexistent123")
         .with_status(404)
         .with_header("content-type", "application/json")
         .with_body(r#"{"error":"photo not found"}"#)
         .create_async()
         .await;
 
-    let client = PhotoPrismClient::new(
-        server.url(),
-        "test".to_string(),
-        "test".to_string(),
-    ).unwrap();
+    let client =
+        PhotoPrismClient::new(server.url(), "test".to_string(), "test".to_string()).unwrap();
 
     let result = client.get_photo("nonexistent123").await;
     assert!(result.is_err());
@@ -173,7 +177,8 @@ async fn test_list_albums() {
     let mut server = Server::new_async().await;
 
     // Mock authentication
-    let _auth_mock = server.mock("POST", "/api/v1/session")
+    let _auth_mock = server
+        .mock("POST", "/api/v1/session")
         .with_status(200)
         .with_header("content-type", "application/json")
         .with_body(r#"{"id":"test-token"}"#)
@@ -181,10 +186,12 @@ async fn test_list_albums() {
         .await;
 
     // Mock albums endpoint
-    let _albums_mock = server.mock("GET", "/api/v1/albums?count=1000")
+    let _albums_mock = server
+        .mock("GET", "/api/v1/albums?count=1000")
         .with_status(200)
         .with_header("content-type", "application/json")
-        .with_body(r#"[
+        .with_body(
+            r#"[
             {
                 "UID": "album123",
                 "Title": "Vacation 2024",
@@ -200,15 +207,13 @@ async fn test_list_albums() {
                 "Favorite": false,
                 "PhotoCount": 128
             }
-        ]"#)
+        ]"#,
+        )
         .create_async()
         .await;
 
-    let client = PhotoPrismClient::new(
-        server.url(),
-        "test".to_string(),
-        "test".to_string(),
-    ).unwrap();
+    let client =
+        PhotoPrismClient::new(server.url(), "test".to_string(), "test".to_string()).unwrap();
 
     let result = client.list_albums().await;
     assert!(result.is_ok());
@@ -216,7 +221,7 @@ async fn test_list_albums() {
     let albums = result.unwrap();
     assert_eq!(albums.len(), 2);
     assert_eq!(albums[0].title, "Vacation 2024");
-    assert_eq!(albums[0].favorite, true);
+    assert!(albums[0].favorite);
     assert_eq!(albums[1].title, "Family");
 }
 
@@ -225,7 +230,8 @@ async fn test_create_album() {
     let mut server = Server::new_async().await;
 
     // Mock authentication
-    let _auth_mock = server.mock("POST", "/api/v1/session")
+    let _auth_mock = server
+        .mock("POST", "/api/v1/session")
         .with_status(200)
         .with_header("content-type", "application/json")
         .with_body(r#"{"id":"test-token"}"#)
@@ -233,25 +239,25 @@ async fn test_create_album() {
         .await;
 
     // Mock create album endpoint
-    let _create_mock = server.mock("POST", "/api/v1/albums")
+    let _create_mock = server
+        .mock("POST", "/api/v1/albums")
         .with_status(200)
         .with_header("content-type", "application/json")
-        .with_body(r#"{
+        .with_body(
+            r#"{
             "UID": "newalbum789",
             "Title": "New Album",
             "Description": "A brand new album",
             "Type": "album",
             "Favorite": false,
             "PhotoCount": 0
-        }"#)
+        }"#,
+        )
         .create_async()
         .await;
 
-    let client = PhotoPrismClient::new(
-        server.url(),
-        "test".to_string(),
-        "test".to_string(),
-    ).unwrap();
+    let client =
+        PhotoPrismClient::new(server.url(), "test".to_string(), "test".to_string()).unwrap();
 
     let create = photoprism_mcp::types::AlbumCreate {
         title: "New Album".to_string(),
@@ -272,7 +278,8 @@ async fn test_list_labels() {
     let mut server = Server::new_async().await;
 
     // Mock authentication
-    let _auth_mock = server.mock("POST", "/api/v1/session")
+    let _auth_mock = server
+        .mock("POST", "/api/v1/session")
         .with_status(200)
         .with_header("content-type", "application/json")
         .with_body(r#"{"id":"test-token"}"#)
@@ -280,10 +287,12 @@ async fn test_list_labels() {
         .await;
 
     // Mock labels endpoint
-    let _labels_mock = server.mock("GET", "/api/v1/labels?count=1000")
+    let _labels_mock = server
+        .mock("GET", "/api/v1/labels?count=1000")
         .with_status(200)
         .with_header("content-type", "application/json")
-        .with_body(r#"[
+        .with_body(
+            r#"[
             {
                 "uid": "label001",
                 "name": "sunset",
@@ -296,15 +305,13 @@ async fn test_list_labels() {
                 "photo_count": 18,
                 "priority": 60
             }
-        ]"#)
+        ]"#,
+        )
         .create_async()
         .await;
 
-    let client = PhotoPrismClient::new(
-        server.url(),
-        "test".to_string(),
-        "test".to_string(),
-    ).unwrap();
+    let client =
+        PhotoPrismClient::new(server.url(), "test".to_string(), "test".to_string()).unwrap();
 
     let result = client.list_labels().await;
     assert!(result.is_ok());
@@ -320,7 +327,8 @@ async fn test_list_subjects() {
     let mut server = Server::new_async().await;
 
     // Mock authentication
-    let _auth_mock = server.mock("POST", "/api/v1/session")
+    let _auth_mock = server
+        .mock("POST", "/api/v1/session")
         .with_status(200)
         .with_header("content-type", "application/json")
         .with_body(r#"{"id":"test-token"}"#)
@@ -328,10 +336,12 @@ async fn test_list_subjects() {
         .await;
 
     // Mock subjects endpoint
-    let _subjects_mock = server.mock("GET", "/api/v1/subjects?count=1000")
+    let _subjects_mock = server
+        .mock("GET", "/api/v1/subjects?count=1000")
         .with_status(200)
         .with_header("content-type", "application/json")
-        .with_body(r#"[
+        .with_body(
+            r#"[
             {
                 "uid": "subject001",
                 "name": "John Doe",
@@ -344,15 +354,13 @@ async fn test_list_subjects() {
                 "photo_count": 38,
                 "favorite": false
             }
-        ]"#)
+        ]"#,
+        )
         .create_async()
         .await;
 
-    let client = PhotoPrismClient::new(
-        server.url(),
-        "test".to_string(),
-        "test".to_string(),
-    ).unwrap();
+    let client =
+        PhotoPrismClient::new(server.url(), "test".to_string(), "test".to_string()).unwrap();
 
     let result = client.list_subjects().await;
     assert!(result.is_ok());
@@ -360,5 +368,5 @@ async fn test_list_subjects() {
     let subjects = result.unwrap();
     assert_eq!(subjects.len(), 2);
     assert_eq!(subjects[0].name, "John Doe");
-    assert_eq!(subjects[0].favorite, true);
+    assert!(subjects[0].favorite);
 }

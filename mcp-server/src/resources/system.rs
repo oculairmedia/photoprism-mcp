@@ -1,6 +1,6 @@
-use turbomcp::prelude::*;
 use crate::client::PhotoPrismClient;
 use std::sync::Arc;
+use turbomcp::prelude::*;
 
 /// System resource handlers
 pub struct SystemResources {
@@ -15,7 +15,8 @@ impl SystemResources {
     /// Get system status
     /// URI: photoprism://system/status
     pub async fn system_status(&self) -> McpResult<String> {
-        let status = self.client
+        let status = self
+            .client
             .get_status()
             .await
             .map_err(|e| McpError::internal(format!("Failed to fetch system status: {}", e)))?;

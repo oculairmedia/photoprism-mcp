@@ -1,15 +1,15 @@
-pub mod photos;
 pub mod albums;
-pub mod search;
-pub mod labels;
-pub mod subjects;
-pub mod library;
 pub mod batch;
+pub mod labels;
+pub mod library;
+pub mod photos;
+pub mod search;
+pub mod subjects;
 
-pub use photos::*;
 pub use albums::*;
-pub use search::*;
-pub use labels::*;
-pub use subjects::*;
-pub use library::*;
 pub use batch::*;
+pub use labels::*;
+pub use library::*;
+pub use photos::*;
+pub use search::*;
+pub use subjects::*;

@@ -1,7 +1,7 @@
-use turbomcp::prelude::*;
 use crate::client::PhotoPrismClient;
 use crate::types::*;
 use std::sync::Arc;
+use turbomcp::prelude::*;
 
 /// Album management tool handlers
 pub struct AlbumTools {
@@ -17,7 +17,8 @@ impl AlbumTools {
     pub async fn list_albums(&self, ctx: Context) -> McpResult<String> {
         ctx.info("Fetching all albums").await?;
 
-        let albums = self.client
+        let albums = self
+            .client
             .list_albums()
             .await
             .map_err(|e| McpError::internal(format!("Failed to list albums: {}", e)))?;
@@ -28,18 +29,15 @@ impl AlbumTools {
     }
 
     /// Get album by UID
-    pub async fn get_album(
-        &self,
-        ctx: Context,
-        uid: String,
-    ) -> McpResult<String> {
+    pub async fn get_album(&self, ctx: Context, uid: String) -> McpResult<String> {
         if uid.is_empty() {
             return Err(McpError::invalid_request("Album UID cannot be empty"));
         }
 
         ctx.info(&format!("Fetching album: {}", uid)).await?;
 
-        let album = self.client
+        let album = self
+            .client
             .get_album(&uid)
             .await
             .map_err(|e| McpError::internal(format!("Album not found: {}", e)))?;
@@ -66,12 +64,14 @@ impl AlbumTools {
             favorite: false,
         };
 
-        let album = self.client
+        let album = self
+            .client
             .create_album(&create)
             .await
             .map_err(|e| McpError::internal(format!("Album creation failed: {}", e)))?;
 
-        ctx.info(&format!("Album created with UID: {}", album.uid)).await?;
+        ctx.info(&format!("Album created with UID: {}", album.uid))
+            .await?;
 
         Ok(serde_json::to_string_pretty(&album)?)
     }
@@ -89,22 +89,20 @@ impl AlbumTools {
 
         ctx.info(&format!("Updating album: {}", uid)).await?;
 
-        let album = self.client
+        let album = self
+            .client
             .update_album(&uid, &updates)
             .await
             .map_err(|e| McpError::internal(format!("Failed to update album: {}", e)))?;
 
-        ctx.info(&format!("Album {} updated successfully", uid)).await?;
+        ctx.info(&format!("Album {} updated successfully", uid))
+            .await?;
 
         Ok(serde_json::to_string_pretty(&album)?)
     }
 
     /// Delete album
-    pub async fn delete_album(
-        &self,
-        ctx: Context,
-        uid: String,
-    ) -> McpResult<String> {
+    pub async fn delete_album(&self, ctx: Context, uid: String) -> McpResult<String> {
         if uid.is_empty() {
             return Err(McpError::invalid_request("Album UID cannot be empty"));
         }
@@ -138,7 +136,8 @@ impl AlbumTools {
             "Adding {} photos to album {}",
             photo_uids.len(),
             album_uid
-        )).await?;
+        ))
+        .await?;
 
         self.client
             .add_photos_to_album(&album_uid, &photo_uids)

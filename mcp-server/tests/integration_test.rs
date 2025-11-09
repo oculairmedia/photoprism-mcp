@@ -1,6 +1,5 @@
 /// Integration tests for PhotoPrism MCP Server
 /// These tests verify that the server components work together correctly
-
 use photoprism_mcp::{Config, PhotoPrismServer};
 
 #[test]
@@ -59,7 +58,9 @@ mod error_tests {
         let err = PhotoPrismError::AuthenticationFailed("test".to_string());
         let mcp_err: McpError = err.into();
         // Should convert to unauthorized error
-        assert!(mcp_err.to_string().contains("test") || mcp_err.to_string().contains("Unauthorized"));
+        assert!(
+            mcp_err.to_string().contains("test") || mcp_err.to_string().contains("Unauthorized")
+        );
 
         let err = PhotoPrismError::NotFound("test".to_string());
         let mcp_err: McpError = err.into();
@@ -106,7 +107,7 @@ mod type_tests {
     fn test_sort_order_default() {
         let sort = SortOrder::default();
         match sort {
-            SortOrder::Newest => assert!(true),
+            SortOrder::Newest => {} // Correct default
             _ => panic!("Default should be Newest"),
         }
     }

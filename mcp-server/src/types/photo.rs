@@ -1,6 +1,6 @@
-use serde::{Deserialize, Serialize};
-use schemars::JsonSchema;
 use chrono::{DateTime, Utc};
+use schemars::JsonSchema;
+use serde::{Deserialize, Serialize};
 
 /// Photo type
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]

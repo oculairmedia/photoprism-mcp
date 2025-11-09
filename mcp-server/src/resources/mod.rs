@@ -1,7 +1,7 @@
-pub mod photos;
 pub mod albums;
+pub mod photos;
 pub mod system;
 
-pub use photos::*;
 pub use albums::*;
+pub use photos::*;
 pub use system::*;

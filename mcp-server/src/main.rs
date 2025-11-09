@@ -7,8 +7,7 @@ async fn main() -> Result<()> {
     // Initialize tracing/logging
     tracing_subscriber::fmt()
         .with_env_filter(
-            EnvFilter::try_from_default_env()
-                .unwrap_or_else(|_| EnvFilter::new("info"))
+            EnvFilter::try_from_default_env().unwrap_or_else(|_| EnvFilter::new("info")),
         )
         .init();
 
@@ -20,7 +19,9 @@ async fn main() -> Result<()> {
         Err(e) => {
             eprintln!("Failed to load configuration: {}", e);
             eprintln!("\nPlease set the following environment variables:");
-            eprintln!("  PHOTOPRISM_URL      - PhotoPrism server URL (default: http://localhost:2342)");
+            eprintln!(
+                "  PHOTOPRISM_URL      - PhotoPrism server URL (default: http://localhost:2342)"
+            );
             eprintln!("  PHOTOPRISM_USERNAME - PhotoPrism username (default: admin)");
             eprintln!("  PHOTOPRISM_PASSWORD - PhotoPrism password (required)");
             eprintln!("\nOr create a config file at: ~/.config/photoprism-mcp/config.yaml");
@@ -40,7 +41,9 @@ async fn main() -> Result<()> {
     tracing::info!("Starting PhotoPrism MCP server with STDIO transport");
 
     // Run server with STDIO transport
-    server.run_stdio().await
+    server
+        .run_stdio()
+        .await
         .map_err(|e| anyhow::anyhow!("Server failed: {}", e))?;
 
     Ok(())
