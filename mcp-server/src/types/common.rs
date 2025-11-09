@@ -89,4 +89,3 @@ pub enum SortOrder {
     Size,
     Duration,
 }
-
