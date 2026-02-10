@@ -91,7 +91,7 @@ impl PhotoPrismServer {
         query: String,
         count: Option<u32>,
     ) -> McpResult<String> {
-        let count = count.unwrap_or(10).min(50);
+        let count = count.unwrap_or(100).min(1000);
 
         ctx.info(&format!("Searching photos: '{}'", query)).await?;
 
@@ -100,14 +100,9 @@ impl PhotoPrismServer {
             .await
             .map_err(|e| McpError::internal(format!("Search failed: {}", e)))?;
 
+        ctx.info(&format!("Found {} photos", photos.len())).await?;
 
-        let response = serde_json::json!({
-            "photos": photos,
-            "count": photos.len(),
-            "note": "Limited to 50 results max. Specify count parameter for different limit."
-        });
-
-        Ok(serde_json::to_string_pretty(&response)?)
+        Ok(serde_json::to_string_pretty(&photos)?)
     }
 
     // Album tools
@@ -232,13 +227,7 @@ impl PhotoPrismServer {
 
         ctx.info(&format!("Found {} labels", labels.len())).await?;
 
-        let response = serde_json::json!({
-            "labels": labels,
-            "count": labels.len(),
-            "note": "Limited to 50 labels."
-        });
-
-        Ok(serde_json::to_string_pretty(&response)?)
+        Ok(serde_json::to_string_pretty(&labels)?)
     }
 
     /// Get photos with a specific label
@@ -249,7 +238,7 @@ impl PhotoPrismServer {
         label: String,
         count: Option<u32>,
     ) -> McpResult<String> {
-        let count = count.unwrap_or(10).min(50);
+        let count = count.unwrap_or(100);
 
         if label.is_empty() {
             return Err(McpError::invalid_request("Label name cannot be empty"));
@@ -262,15 +251,7 @@ impl PhotoPrismServer {
             .await
             .map_err(|e| McpError::internal(format!("Failed to get photos: {}", e)))?;
 
-
-        let response = serde_json::json!({
-            "photos": photos,
-            "count": photos.len(),
-            "label": label,
-            "note": "Limited to 50 results max."
-        });
-
-        Ok(serde_json::to_string_pretty(&response)?)
+        Ok(serde_json::to_string_pretty(&photos)?)
     }
 
     // Subject tools

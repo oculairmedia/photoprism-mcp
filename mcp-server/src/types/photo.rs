@@ -21,6 +21,7 @@ pub struct Photo {
     pub uid: String,
 
     /// Photo title
+    #[serde(default)]
     pub title: String,
 
     /// Description
@@ -28,6 +29,7 @@ pub struct Photo {
     pub description: Option<String>,
 
     /// Original filename
+    #[serde(default)]
     pub original_name: String,
 
     /// Photo type (image, video, live, raw)
@@ -63,12 +65,15 @@ pub struct Photo {
     pub lng: Option<f64>,
 
     /// File hash
+    #[serde(default)]
     pub hash: String,
 
     /// Width in pixels
+    #[serde(default)]
     pub width: u32,
 
     /// Height in pixels
+    #[serde(default)]
     pub height: u32,
 }
 

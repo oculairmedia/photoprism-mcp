@@ -222,7 +222,8 @@ impl PhotoPrismClient {
 
     /// List all albums
     pub async fn list_albums(&self) -> Result<Vec<Album>> {
-        let path = "/api/v1/albums?count=1000";
+        // Limit to 20 albums to reduce token usage
+        let path = "/api/v1/albums?count=20";
         self.get(&path).await
     }
 
@@ -278,7 +279,7 @@ impl PhotoPrismClient {
 
     /// List all labels
     pub async fn list_labels(&self) -> Result<Vec<Label>> {
-        let path = "/api/v1/labels?count=1000";
+        let path = "/api/v1/labels?count=50";
         self.get(&path).await
     }
 
@@ -306,27 +307,29 @@ impl PhotoPrismClient {
 
     /// Get system status
     pub async fn get_status(&self) -> Result<SystemStatus> {
-        let path = "/api/v1/status";
+        let path = "/api/v1/config";
 
         #[derive(Deserialize)]
-        struct StatusResponse {
+        struct ConfigResponse {
             version: String,
             edition: String,
+            count: ConfigCount,
         }
 
-        let status: StatusResponse = self.get(&path).await?;
+        #[derive(Deserialize)]
+        struct ConfigCount {
+            photos: u64,
+            albums: u64,
+        }
 
-        // Get counts from different endpoints
-        let photos: Vec<Photo> = self.get("/api/v1/photos?count=0").await.unwrap_or_default();
-        let albums: Vec<Album> = self.get("/api/v1/albums?count=0").await.unwrap_or_default();
-        let labels: Vec<Label> = self.get("/api/v1/labels?count=0").await.unwrap_or_default();
+        let config: ConfigResponse = self.get(&path).await?;
 
         Ok(SystemStatus {
-            version: status.version,
-            edition: status.edition,
-            photos: photos.len() as u64,
-            albums: albums.len() as u64,
-            labels: labels.len() as u64,
+            version: config.version,
+            edition: config.edition,
+            photos: config.count.photos,
+            albums: config.count.albums,
+            labels: 0, // Labels count not available in config endpoint
         })
     }
 }

@@ -19,17 +19,24 @@ impl SearchTools {
         query: String,
         count: Option<u32>,
     ) -> McpResult<String> {
-        let count = count.unwrap_or(100).min(1000);
+        // Default to 10, max 50 to reduce token usage
+        let count = count.unwrap_or(10).min(50);
 
-        ctx.info(&format!("Searching photos with query: '{}'", query)).await?;
+        ctx.info(&format!("Searching photos: '{}'", query)).await?;
 
         let photos = self.client
             .search_photos(&query, count)
             .await
             .map_err(|e| McpError::internal(format!("Search failed: {}", e)))?;
 
-        ctx.info(&format!("Found {} matching photos", photos.len())).await?;
+        ctx.info(&format!("Found {} photos", photos.len())).await?;
 
-        Ok(serde_json::to_string_pretty(&photos)?)
+        let response = serde_json::json!({
+            "photos": photos,
+            "count": photos.len(),
+            "note": "Limited to 50 results max. Specify count parameter for different limit."
+        });
+
+        Ok(serde_json::to_string_pretty(&response)?)
     }
 }

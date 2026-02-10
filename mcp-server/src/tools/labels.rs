@@ -15,7 +15,7 @@ impl LabelTools {
     /// List all labels
     /// Returns a list of all labels/tags in the PhotoPrism library
     pub async fn list_labels(&self, ctx: Context) -> McpResult<String> {
-        ctx.info("Fetching all labels from PhotoPrism").await?;
+        ctx.info("Fetching labels").await?;
 
         let labels = self.client
             .list_labels()
@@ -24,7 +24,13 @@ impl LabelTools {
 
         ctx.info(&format!("Found {} labels", labels.len())).await?;
 
-        Ok(serde_json::to_string_pretty(&labels)?)
+        let response = serde_json::json!({
+            "labels": labels,
+            "count": labels.len(),
+            "note": "Limited to 50 labels."
+        });
+
+        Ok(serde_json::to_string_pretty(&response)?)
     }
 
     /// Get photos by label
@@ -35,21 +41,29 @@ impl LabelTools {
         label: String,
         count: Option<u32>,
     ) -> McpResult<String> {
-        let count = count.unwrap_or(100);
+        // Default to 10, max 50
+        let count = count.unwrap_or(10).min(50);
 
         if label.is_empty() {
             return Err(McpError::invalid_request("Label name cannot be empty"));
         }
 
-        ctx.info(&format!("Fetching photos with label '{}'", label)).await?;
+        ctx.info(&format!("Fetching photos: label '{}'", label)).await?;
 
         let photos = self.client
             .get_photos_by_label(&label, count)
             .await
-            .map_err(|e| McpError::internal(format!("Failed to get photos by label: {}", e)))?;
+            .map_err(|e| McpError::internal(format!("Failed: {}", e)))?;
 
-        ctx.info(&format!("Found {} photos with label '{}'", photos.len(), label)).await?;
+        ctx.info(&format!("Found {} photos", photos.len())).await?;
 
-        Ok(serde_json::to_string_pretty(&photos)?)
+        let response = serde_json::json!({
+            "photos": photos,
+            "count": photos.len(),
+            "label": label,
+            "note": "Limited to 50 results max."
+        });
+
+        Ok(serde_json::to_string_pretty(&response)?)
     }
 }

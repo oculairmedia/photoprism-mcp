@@ -1,0 +1,2071 @@
+{
+  "projectId": "PPMCP",
+  "version": 1,
+  "updatedAt": 1769587741998,
+  "files": {
+    "assets/static/js/browser-check.js": {
+      "path": "assets/static/js/browser-check.js",
+      "contentHash": "39ae389e9b840a40231b843315aab633",
+      "mtime": 1762642875704.8652,
+      "functions": [
+        {
+          "name": "supportsModernJs",
+          "signature": "function supportsModernJs()",
+          "parameters": "()",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 4,
+          "end_line": 31,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "showUnsupportedMessage",
+          "signature": "function showUnsupportedMessage(message)",
+          "parameters": "(message)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 33,
+          "end_line": 57,
+          "is_async": false,
+          "is_generator": false
+        }
+      ],
+      "parsedAt": 1769587564143
+    },
+    "assets/static/plugins/maplibre-gl-rtl-text/v0.2.3/maplibre-gl-rtl-text.js": {
+      "path": "assets/static/plugins/maplibre-gl-rtl-text/v0.2.3/maplibre-gl-rtl-text.js",
+      "contentHash": "e3b1bd3256c6e2785c1c7786bf60a1a7",
+      "mtime": 1762642875704.8652,
+      "functions": [
+        {
+          "name": "locateFile",
+          "signature": "function locateFile(path)",
+          "parameters": "(path)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 1,
+          "end_line": 1,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "dynamicAlloc",
+          "signature": "function dynamicAlloc(size)",
+          "parameters": "(size)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 1,
+          "end_line": 1,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "getNativeTypeSize",
+          "signature": "function getNativeTypeSize(type)",
+          "parameters": "(type)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 1,
+          "end_line": 1,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "warnOnce",
+          "signature": "function warnOnce(text)",
+          "parameters": "(text)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 1,
+          "end_line": 1,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "dynCall",
+          "signature": "function dynCall(sig,ptr,args)",
+          "parameters": "(sig,ptr,args)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 1,
+          "end_line": 1,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "setTempRet0",
+          "signature": "function setTempRet0(value)",
+          "parameters": "(value)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 1,
+          "end_line": 1,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "getTempRet0",
+          "signature": "function getTempRet0()",
+          "parameters": "()",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 1,
+          "end_line": 1,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "assert_em",
+          "signature": "function assert_em(condition,text)",
+          "parameters": "(condition,text)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 1,
+          "end_line": 1,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "getCFunc",
+          "signature": "function getCFunc(ident)",
+          "parameters": "(ident)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 1,
+          "end_line": 1,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "ccall",
+          "signature": "function ccall(ident,returnType,argTypes,args,opts)",
+          "parameters": "(ident,returnType,argTypes,args,opts)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 1,
+          "end_line": 1,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "setValue",
+          "signature": "function setValue(ptr,value,type,noSafe)",
+          "parameters": "(ptr,value,type,noSafe)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 1,
+          "end_line": 1,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "getMemory",
+          "signature": "function getMemory(size)",
+          "parameters": "(size)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 1,
+          "end_line": 1,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "UTF8ArrayToString",
+          "signature": "function UTF8ArrayToString(u8Array,idx,maxBytesToRead)",
+          "parameters": "(u8Array,idx,maxBytesToRead)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 1,
+          "end_line": 1,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "UTF8ToString",
+          "signature": "function UTF8ToString(ptr,maxBytesToRead)",
+          "parameters": "(ptr,maxBytesToRead)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 1,
+          "end_line": 1,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "stringToUTF8Array",
+          "signature": "function stringToUTF8Array(str,outU8Array,outIdx,maxBytesToWrite)",
+          "parameters": "(str,outU8Array,outIdx,maxBytesToWrite)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 1,
+          "end_line": 1,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "stringToUTF8",
+          "signature": "function stringToUTF8(str,outPtr,maxBytesToWrite)",
+          "parameters": "(str,outPtr,maxBytesToWrite)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 1,
+          "end_line": 1,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "lengthBytesUTF8",
+          "signature": "function lengthBytesUTF8(str)",
+          "parameters": "(str)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 1,
+          "end_line": 1,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "UTF16ToString",
+          "signature": "function UTF16ToString(ptr)",
+          "parameters": "(ptr)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 1,
+          "end_line": 1,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "stringToUTF16",
+          "signature": "function stringToUTF16(str,outPtr,maxBytesToWrite)",
+          "parameters": "(str,outPtr,maxBytesToWrite)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 1,
+          "end_line": 1,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "writeArrayToMemory",
+          "signature": "function writeArrayToMemory(array,buffer)",
+          "parameters": "(array,buffer)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 1,
+          "end_line": 1,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "writeAsciiToMemory",
+          "signature": "function writeAsciiToMemory(str,buffer,dontAddNull)",
+          "parameters": "(str,buffer,dontAddNull)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 1,
+          "end_line": 1,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "demangle",
+          "signature": "function demangle(func)",
+          "parameters": "(func)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 1,
+          "end_line": 1,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "demangleAll",
+          "signature": "function demangleAll(text)",
+          "parameters": "(text)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 1,
+          "end_line": 1,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "jsStackTrace",
+          "signature": "function jsStackTrace()",
+          "parameters": "()",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 1,
+          "end_line": 1,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "alignUp",
+          "signature": "function alignUp(x,multiple)",
+          "parameters": "(x,multiple)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 1,
+          "end_line": 1,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "updateGlobalBufferViews",
+          "signature": "function updateGlobalBufferViews()",
+          "parameters": "()",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 1,
+          "end_line": 1,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "callRuntimeCallbacks",
+          "signature": "function callRuntimeCallbacks(callbacks)",
+          "parameters": "(callbacks)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 1,
+          "end_line": 1,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "preRun",
+          "signature": "function preRun()",
+          "parameters": "()",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 1,
+          "end_line": 1,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "ensureInitRuntime",
+          "signature": "function ensureInitRuntime()",
+          "parameters": "()",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 1,
+          "end_line": 1,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "preMain",
+          "signature": "function preMain()",
+          "parameters": "()",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 1,
+          "end_line": 1,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "exitRuntime",
+          "signature": "function exitRuntime()",
+          "parameters": "()",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 1,
+          "end_line": 1,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "postRun",
+          "signature": "function postRun()",
+          "parameters": "()",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 1,
+          "end_line": 1,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "addOnPreRun",
+          "signature": "function addOnPreRun(cb)",
+          "parameters": "(cb)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 1,
+          "end_line": 1,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "addOnPostRun",
+          "signature": "function addOnPostRun(cb)",
+          "parameters": "(cb)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 1,
+          "end_line": 1,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "addRunDependency",
+          "signature": "function addRunDependency(id)",
+          "parameters": "(id)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 1,
+          "end_line": 1,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "removeRunDependency",
+          "signature": "function removeRunDependency(id)",
+          "parameters": "(id)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 1,
+          "end_line": 1,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "isDataURI",
+          "signature": "function isDataURI(filename)",
+          "parameters": "(filename)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 1,
+          "end_line": 1,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "abortOnCannotGrowMemory",
+          "signature": "function abortOnCannotGrowMemory(requestedSize)",
+          "parameters": "(requestedSize)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 3,
+          "end_line": 3,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "emscripten_realloc_buffer",
+          "signature": "function emscripten_realloc_buffer(size)",
+          "parameters": "(size)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 3,
+          "end_line": 3,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "intArrayToString",
+          "signature": "function intArrayToString(array)",
+          "parameters": "(array)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 3,
+          "end_line": 3,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "intArrayFromBase64",
+          "signature": "function intArrayFromBase64(s)",
+          "parameters": "(s)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 3,
+          "end_line": 3,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "tryParseAsDataURI",
+          "signature": "function tryParseAsDataURI(filename)",
+          "parameters": "(filename)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 3,
+          "end_line": 3,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "applyMemoryInitializer",
+          "signature": "function applyMemoryInitializer(data)",
+          "parameters": "(data)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 5,
+          "end_line": 5,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "doBrowserLoad",
+          "signature": "function doBrowserLoad()",
+          "parameters": "()",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 5,
+          "end_line": 5,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "useRequest",
+          "signature": "function useRequest()",
+          "parameters": "()",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 5,
+          "end_line": 5,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "ExitStatus",
+          "signature": "function ExitStatus(status)",
+          "parameters": "(status)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 5,
+          "end_line": 5,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "run",
+          "signature": "function run(args)",
+          "parameters": "(args)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 5,
+          "end_line": 5,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "abort",
+          "signature": "function abort(what)",
+          "parameters": "(what)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 5,
+          "end_line": 5,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "applyArabicShaping",
+          "signature": "function applyArabicShaping(input)",
+          "parameters": "(input)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 5,
+          "end_line": 5,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "mergeParagraphLineBreakPoints",
+          "signature": "function mergeParagraphLineBreakPoints(lineBreakPoints,paragraphCount)",
+          "parameters": "(lineBreakPoints,paragraphCount)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 5,
+          "end_line": 5,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "setParagraph",
+          "signature": "function setParagraph(input,stringInputPtr,nDataBytes)",
+          "parameters": "(input,stringInputPtr,nDataBytes)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 5,
+          "end_line": 5,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "processBidirectionalText",
+          "signature": "function processBidirectionalText(input,lineBreakPoints)",
+          "parameters": "(input,lineBreakPoints)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 5,
+          "end_line": 6,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "createInt32Ptr",
+          "signature": "function createInt32Ptr()",
+          "parameters": "()",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 6,
+          "end_line": 6,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "consumeInt32Ptr",
+          "signature": "function consumeInt32Ptr(ptr)",
+          "parameters": "(ptr)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 6,
+          "end_line": 6,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "writeReverse",
+          "signature": "function writeReverse(stringInputPtr,logicalStart,logicalEnd)",
+          "parameters": "(stringInputPtr,logicalStart,logicalEnd)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 6,
+          "end_line": 6,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "processStyledBidirectionalText",
+          "signature": "function processStyledBidirectionalText(text,styleIndices,lineBreakPoints)",
+          "parameters": "(text,styleIndices,lineBreakPoints)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 6,
+          "end_line": 6,
+          "is_async": false,
+          "is_generator": false
+        }
+      ],
+      "parsedAt": 1769587564144
+    },
+    "frontend/src/app.js": {
+      "path": "frontend/src/app.js",
+      "contentHash": "722b3e00fee44feaf121e593a84824cd",
+      "mtime": 1762642875732.866,
+      "functions": [
+        {
+          "name": "currentHistoryState",
+          "signature": "const currentHistoryState = () =>",
+          "parameters": "()",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 201,
+          "end_line": 211,
+          "is_async": false,
+          "is_generator": false
+        }
+      ],
+      "parsedAt": 1769587564144
+    },
+    "frontend/src/common/albums.js": {
+      "path": "frontend/src/common/albums.js",
+      "contentHash": "6c756ed7ae77fa3da6efc7fb3c10597d",
+      "mtime": 1762642875736.8662,
+      "functions": [
+        {
+          "name": "processAlbumSelection",
+          "signature": "function processAlbumSelection(selectedAlbums, availableAlbums)",
+          "parameters": "(selectedAlbums, availableAlbums)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 3,
+          "end_line": 42,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "createAlbumSelectionWatcher",
+          "signature": "function createAlbumSelectionWatcher(albumsProperty)",
+          "parameters": "(albumsProperty)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 45,
+          "end_line": 60,
+          "is_async": false,
+          "is_generator": false
+        }
+      ],
+      "parsedAt": 1769587564145
+    },
+    "frontend/src/common/download.js": {
+      "path": "frontend/src/common/download.js",
+      "contentHash": "5d7cd2aaffbb85812c45b36cfb65fcff",
+      "mtime": 1762642875736.8662,
+      "functions": [
+        {
+          "name": "download",
+          "signature": "function download(url, name)",
+          "parameters": "(url, name)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 32,
+          "end_line": 73,
+          "is_async": false,
+          "is_generator": false
+        }
+      ],
+      "parsedAt": 1769587564145
+    },
+    "frontend/src/common/form.js": {
+      "path": "frontend/src/common/form.js",
+      "contentHash": "9af5a5b2deca40fb50008df31de2a0e2",
+      "mtime": 1762642875736.8662,
+      "functions": [
+        {
+          "name": "minValidator",
+          "signature": "const minValidator = (v) =>",
+          "parameters": "(v)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 311,
+          "end_line": 323,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "maxValidator",
+          "signature": "const maxValidator = (v) =>",
+          "parameters": "(v)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 325,
+          "end_line": 337,
+          "is_async": false,
+          "is_generator": false
+        }
+      ],
+      "parsedAt": 1769587564145
+    },
+    "frontend/src/common/gettext.js": {
+      "path": "frontend/src/common/gettext.js",
+      "contentHash": "ab2b39dbaeb937a60fbbe959049111f5",
+      "mtime": 1762642875736.8662,
+      "functions": [
+        {
+          "name": "T",
+          "signature": "function T(msgid, params)",
+          "parameters": "(msgid, params)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 14,
+          "end_line": 16,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "$gettext",
+          "signature": "function $gettext(msgid, params)",
+          "parameters": "(msgid, params)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 18,
+          "end_line": 20,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "$ngettext",
+          "signature": "function $ngettext(msgid, plural, n)",
+          "parameters": "(msgid, plural, n)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 22,
+          "end_line": 24,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "$pgettext",
+          "signature": "function $pgettext(context, msgid, params)",
+          "parameters": "(context, msgid, params)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 26,
+          "end_line": 28,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "$npgettext",
+          "signature": "function $npgettext(domain, context, msgid, plural, n)",
+          "parameters": "(domain, context, msgid, plural, n)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 30,
+          "end_line": 32,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "createGettext",
+          "signature": "function createGettext(config)",
+          "parameters": "(config)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 34,
+          "end_line": 43,
+          "is_async": false,
+          "is_generator": false
+        }
+      ],
+      "parsedAt": 1769587564145
+    },
+    "frontend/src/common/hooks.js": {
+      "path": "frontend/src/common/hooks.js",
+      "contentHash": "d885c187d1dde5b10c6d31292d536add",
+      "mtime": 1762642875736.8662,
+      "functions": [
+        {
+          "name": "onInit",
+          "signature": "function onInit()",
+          "parameters": "()",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 1,
+          "end_line": 1,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "onSetTheme",
+          "signature": "function onSetTheme(/*name, config*/)",
+          "parameters": "(/*name, config*/)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 3,
+          "end_line": 5,
+          "is_async": false,
+          "is_generator": false
+        }
+      ],
+      "parsedAt": 1769587564145
+    },
+    "frontend/src/common/map.js": {
+      "path": "frontend/src/common/map.js",
+      "contentHash": "6d72c61e2d88f0e96c4a0fc25bd47340",
+      "mtime": 1762642875736.8662,
+      "functions": [
+        {
+          "name": "load",
+          "signature": "async function load()",
+          "parameters": "()",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 5,
+          "end_line": 23,
+          "is_async": true,
+          "is_generator": false
+        }
+      ],
+      "parsedAt": 1769587564145
+    },
+    "frontend/src/common/maplibregl.js": {
+      "path": "frontend/src/common/maplibregl.js",
+      "contentHash": "86b63d839fef5783da0d3dffcfb5dc6b",
+      "mtime": 1762642875736.8662,
+      "functions": [
+        {
+          "name": "langFallbackDecorate",
+          "signature": "function langFallbackDecorate(style, cfg)",
+          "parameters": "(style, cfg)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 8,
+          "end_line": 54,
+          "is_async": false,
+          "is_generator": false
+        }
+      ],
+      "parsedAt": 1769587564145
+    },
+    "frontend/src/common/selection.js": {
+      "path": "frontend/src/common/selection.js",
+      "contentHash": "b596d2b3b97ae1529243dc2b9017d31a",
+      "mtime": 1762642875736.8662,
+      "functions": [
+        {
+          "name": "isObject",
+          "signature": "function isObject(val)",
+          "parameters": "(val)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 26,
+          "end_line": 28,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "isModel",
+          "signature": "function isModel(model)",
+          "parameters": "(model)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 30,
+          "end_line": 32,
+          "is_async": false,
+          "is_generator": false
+        }
+      ],
+      "parsedAt": 1769587564145
+    },
+    "frontend/src/common/server.js": {
+      "path": "frontend/src/common/server.js",
+      "contentHash": "38370c0faa466c89f6e3748acc5ab4e8",
+      "mtime": 1762642875736.8662,
+      "functions": [
+        {
+          "name": "poll",
+          "signature": "function poll(interval, maxAttempts)",
+          "parameters": "(interval, maxAttempts)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 30,
+          "end_line": 57,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "restart",
+          "signature": "function restart(uri)",
+          "parameters": "(uri)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 59,
+          "end_line": 87,
+          "is_async": false,
+          "is_generator": false
+        }
+      ],
+      "parsedAt": 1769587564145
+    },
+    "frontend/src/common/sky.js": {
+      "path": "frontend/src/common/sky.js",
+      "contentHash": "233781b599dcc82c2de7e3010fd5e61c",
+      "mtime": 1762642875736.8662,
+      "functions": [
+        {
+          "name": "star",
+          "signature": "function star(i)",
+          "parameters": "(i)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 2,
+          "end_line": 12,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "render",
+          "signature": "function render(el, stars)",
+          "parameters": "(el, stars)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 15,
+          "end_line": 39,
+          "is_async": false,
+          "is_generator": false
+        }
+      ],
+      "parsedAt": 1769587564145
+    },
+    "frontend/src/common/util.js": {
+      "path": "frontend/src/common/util.js",
+      "contentHash": "681b3f275845eb31ad38b00265b8ae18",
+      "mtime": 1762642875736.8662,
+      "functions": [
+        {
+          "name": "kFunc(ma",
+          "signature": "function kFunc(matched) {\n",
+          "parameters": "tched) {\n",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 315,
+          "end_line": 333,
+          "is_async": false,
+          "is_generator": false
+        }
+      ],
+      "parsedAt": 1769587564146
+    },
+    "frontend/src/common/view.js": {
+      "path": "frontend/src/common/view.js",
+      "contentHash": "e124ecbbf799208a4bcd659483d3b62f",
+      "mtime": 1762642875736.8662,
+      "functions": [
+        {
+          "name": "getHistoryState",
+          "signature": "const getHistoryState = () =>",
+          "parameters": "()",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 20,
+          "end_line": 26,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "parseHistoryPosition",
+          "signature": "const parseHistoryPosition = (state) =>",
+          "parameters": "(state)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 29,
+          "end_line": 41,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "getHtmlElement",
+          "signature": "function getHtmlElement()",
+          "parameters": "()",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 44,
+          "end_line": 46,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "initHtmlElement",
+          "signature": "function initHtmlElement()",
+          "parameters": "()",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 49,
+          "end_line": 70,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "setHtmlStyle",
+          "signature": "function setHtmlStyle(key, value)",
+          "parameters": "(key, value)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 72,
+          "end_line": 88,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "getBodyElement",
+          "signature": "function getBodyElement()",
+          "parameters": "()",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 91,
+          "end_line": 93,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "getScrollbarWidth",
+          "signature": "function getScrollbarWidth()",
+          "parameters": "()",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 96,
+          "end_line": 104,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "isInputElement",
+          "signature": "function isInputElement(el)",
+          "parameters": "(el)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 107,
+          "end_line": 113,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "isMediaElement",
+          "signature": "function isMediaElement(el)",
+          "parameters": "(el)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 116,
+          "end_line": 122,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "isPos",
+          "signature": "const isPos = (v) =>",
+          "parameters": "(v)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 128,
+          "end_line": 128,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "encodeRestoreKey",
+          "signature": "const encodeRestoreKey = (key) =>",
+          "parameters": "(key)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 183,
+          "end_line": 189,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "findFocusElement",
+          "signature": "function findFocusElement(c)",
+          "parameters": "(c)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 192,
+          "end_line": 253,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "setFocus",
+          "signature": "function setFocus(el, selector, scroll)",
+          "parameters": "(el, selector, scroll)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 256,
+          "end_line": 304,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "preventNavigationTouchEvent",
+          "signature": "function preventNavigationTouchEvent(ev)",
+          "parameters": "(ev)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 307,
+          "end_line": 320,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "generateRandomId",
+          "signature": "function generateRandomId()",
+          "parameters": "()",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 323,
+          "end_line": 325,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "tContainer =",
+          "signature": "const tContainer = =  = =>",
+          "parameters": " =",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 963,
+          "end_line": 963,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "amp =",
+          "signature": "const amp = =  = =>",
+          "parameters": " =",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 965,
+          "end_line": 973,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "temptRestore =",
+          "signature": "const temptRestore = = aitForAjax) = =>",
+          "parameters": "aitForAjax) =",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 975,
+          "end_line": 1015,
+          "is_async": false,
+          "is_generator": false
+        }
+      ],
+      "parsedAt": 1769587564146
+    },
+    "frontend/src/component/components.js": {
+      "path": "frontend/src/component/components.js",
+      "contentHash": "7e583c93b6ecd05f8597ce1b1915733a",
+      "mtime": 1762642875740.8662,
+      "functions": [
+        {
+          "name": "install",
+          "signature": "function install(app)",
+          "parameters": "(app)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 78,
+          "end_line": 138,
+          "is_async": false,
+          "is_generator": false
+        }
+      ],
+      "parsedAt": 1769587564146
+    },
+    "frontend/src/component/places/style-control.js": {
+      "path": "frontend/src/component/places/style-control.js",
+      "contentHash": "a989cce4ceae34e329dfa4927fb04a48",
+      "mtime": 1762642875748.8665,
+      "functions": [
+        {
+          "name": "handler",
+          "signature": "const handler = (event) =>",
+          "parameters": "(event)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 35,
+          "end_line": 51,
+          "is_async": false,
+          "is_generator": false
+        }
+      ],
+      "parsedAt": 1769587564146
+    },
+    "frontend/src/locales.js": {
+      "path": "frontend/src/locales.js",
+      "contentHash": "6f86235a8a3c133a74b1df2561086866",
+      "mtime": 1762642875756.8667,
+      "functions": [
+        {
+          "name": "Locale",
+          "signature": "const Locale = () =>",
+          "parameters": "()",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 5,
+          "end_line": 15,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "s: $gett",
+          "signature": "const s: $gett = (\"Dismiss\" =>",
+          "parameters": "(\"Dismiss\"",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 202,
+          "end_line": 311,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "ttext(\"Userna",
+          "signature": "const ttext(\"Userna = ); =>",
+          "parameters": ");",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 314,
+          "end_line": 363,
+          "is_async": false,
+          "is_generator": false
+        }
+      ],
+      "parsedAt": 1769587564146
+    },
+    "frontend/src/model/logs.js": {
+      "path": "frontend/src/model/logs.js",
+      "contentHash": "5b2cf7ea4aaa8c063829fd29d59bbb56",
+      "mtime": 1762642875864.8694,
+      "functions": [
+        {
+          "name": "oksLikeIp(v",
+          "signature": "function oksLikeIp(value) {",
+          "parameters": "alue) {",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 8,
+          "end_line": 28,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "litSegments(m",
+          "signature": "function litSegments(message) {",
+          "parameters": "essage) {",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 30,
+          "end_line": 39,
+          "is_async": false,
+          "is_generator": false
+        }
+      ],
+      "parsedAt": 1769587677204
+    },
+    "frontend/src/options/auth.js": {
+      "path": "frontend/src/options/auth.js",
+      "contentHash": "3efdfb3519c4e55db5cd879518b06560",
+      "mtime": 1762642875864.8694,
+      "functions": [
+        {
+          "name": "Roles",
+          "signature": "const Roles = () =>",
+          "parameters": "()",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 4,
+          "end_line": 16,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "Providers",
+          "signature": "const Providers = () =>",
+          "parameters": "()",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 19,
+          "end_line": 35,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "Methods",
+          "signature": "const Methods = () =>",
+          "parameters": "()",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 38,
+          "end_line": 50,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "Scopes",
+          "signature": "const Scopes = () =>",
+          "parameters": "()",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 53,
+          "end_line": 59,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "ScopeOptions",
+          "signature": "const ScopeOptions = () =>",
+          "parameters": "()",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 62,
+          "end_line": 83,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "GrantTypes",
+          "signature": "const GrantTypes = () =>",
+          "parameters": "()",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 86,
+          "end_line": 101,
+          "is_async": false,
+          "is_generator": false
+        }
+      ],
+      "parsedAt": 1769587677204
+    },
+    "frontend/src/options/options.js": {
+      "path": "frontend/src/options/options.js",
+      "contentHash": "4dce42b29f9285bbe3ef5da42e9aad18",
+      "mtime": 1762642875864.8694,
+      "functions": [
+        {
+          "name": "TimeZones",
+          "signature": "const TimeZones = (defaultName) =>",
+          "parameters": "(defaultName)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 36,
+          "end_line": 42,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "Days",
+          "signature": "const Days = () =>",
+          "parameters": "()",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 44,
+          "end_line": 54,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "Years",
+          "signature": "const Years = (start) =>",
+          "parameters": "(start)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 56,
+          "end_line": 72,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "IndexedYears",
+          "signature": "const IndexedYears = () =>",
+          "parameters": "()",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 74,
+          "end_line": 89,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "Months",
+          "signature": "const Months = () =>",
+          "parameters": "()",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 91,
+          "end_line": 103,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "MonthsShort",
+          "signature": "const MonthsShort = () =>",
+          "parameters": "()",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 105,
+          "end_line": 115,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "SetDefaultLocale",
+          "signature": "const SetDefaultLocale = (locale) =>",
+          "parameters": "(locale)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 121,
+          "end_line": 127,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "Languages",
+          "signature": "const Languages = () =>",
+          "parameters": "()",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 130,
+          "end_line": 130,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "FallbackLanguage",
+          "signature": "const FallbackLanguage = () =>",
+          "parameters": "()",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 133,
+          "end_line": 139,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "FindLanguage",
+          "signature": "const FindLanguage = (locale) =>",
+          "parameters": "(locale)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 142,
+          "end_line": 166,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "FallbackLocale",
+          "signature": "const FallbackLocale = () =>",
+          "parameters": "()",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 169,
+          "end_line": 171,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "FindLocale",
+          "signature": "const FindLocale = (locale) =>",
+          "parameters": "(locale)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 174,
+          "end_line": 186,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "ItemsPerPage",
+          "signature": "const ItemsPerPage = () =>",
+          "parameters": "()",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 188,
+          "end_line": 193,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "StartPages",
+          "signature": "const StartPages = (features, isPortal) =>",
+          "parameters": "(features, isPortal)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 195,
+          "end_line": 214,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "MapsAnimate",
+          "signature": "const MapsAnimate = () =>",
+          "parameters": "()",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 216,
+          "end_line": 233,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "MapsStyle",
+          "signature": "const MapsStyle = (experimental) =>",
+          "parameters": "(experimental)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 235,
+          "end_line": 283,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "PhotoTypes",
+          "signature": "const PhotoTypes = () =>",
+          "parameters": "()",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 285,
+          "end_line": 318,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "Timeouts",
+          "signature": "const Timeouts = () =>",
+          "parameters": "()",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 320,
+          "end_line": 337,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "RetryLimits",
+          "signature": "const RetryLimits = () =>",
+          "parameters": "()",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 339,
+          "end_line": 364,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "Intervals",
+          "signature": "const Intervals = () =>",
+          "parameters": "()",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 366,
+          "end_line": 374,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "Expires",
+          "signature": "const Expires = () =>",
+          "parameters": "()",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 376,
+          "end_line": 385,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "Colors",
+          "signature": "const Colors = () =>",
+          "parameters": "()",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 387,
+          "end_line": 404,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "FeedbackCategories",
+          "signature": "const FeedbackCategories = () =>",
+          "parameters": "()",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 406,
+          "end_line": 411,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "Thumbs",
+          "signature": "const Thumbs = () =>",
+          "parameters": "()",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 413,
+          "end_line": 415,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "ThumbSizes",
+          "signature": "const ThumbSizes = () =>",
+          "parameters": "()",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 417,
+          "end_line": 428,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "humbFilters ",
+          "signature": "const humbFilters  = )  =>",
+          "parameters": ") ",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 430,
+          "end_line": 435,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "ender ",
+          "signature": "const ender  = )  =>",
+          "parameters": ") ",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 437,
+          "end_line": 441,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "rientations ",
+          "signature": "const rientations  = )  =>",
+          "parameters": ") ",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 443,
+          "end_line": 448,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "ntTypes = ()",
+          "signature": "const ntTypes = () =  [ =>",
+          "parameters": " [",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 450,
+          "end_line": 450,
+          "is_async": false,
+          "is_generator": false
+        }
+      ],
+      "parsedAt": 1769587677204
+    },
+    "frontend/src/options/themes.js": {
+      "path": "frontend/src/options/themes.js",
+      "contentHash": "78b143f5f01ce592686a473c8e2098d0",
+      "mtime": 1762642875864.8694,
+      "functions": [
+        {
+          "name": "All",
+          "signature": "const All = () =>",
+          "parameters": "()",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 928,
+          "end_line": 955,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "Get",
+          "signature": "const Get = (name, preferForced = true) =>",
+          "parameters": "(name, preferForced = true)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 958,
+          "end_line": 984,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "Set",
+          "signature": "const Set = (name, theme) =>",
+          "parameters": "(name, theme)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 987,
+          "end_line": 1019,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "Assign",
+          "signature": "const Assign = (t) =>",
+          "parameters": "(t)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 1022,
+          "end_line": 1028,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "Remove",
+          "signature": "const Remove = (name) =>",
+          "parameters": "(name)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 1031,
+          "end_line": 1037,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "Translated",
+          "signature": "const Translated = () =>",
+          "parameters": "()",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 1040,
+          "end_line": 1051,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "options",
+          "signature": "const Options = () =>",
+          "parameters": "()",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 1053,
+          "end_line": 1053,
+          "is_async": false,
+          "is_generator": false
+        },
+        {
+          "name": "SetOptions",
+          "signature": "const SetOptions = (v) =>",
+          "parameters": "(v)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 1055,
+          "end_line": 1055,
+          "is_async": false,
+          "is_generator": false
+        }
+      ],
+      "parsedAt": 1769587677204
+    },
+    "frontend/src/options/ui.js": {
+      "path": "frontend/src/options/ui.js",
+      "contentHash": "e21dd6dac4dd38133c04aefe0f3cb84c",
+      "mtime": 1762642875864.8694,
+      "functions": [
+        {
+          "name": "style",
+          "signature": "function style(theme)",
+          "parameters": "(theme)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 135,
+          "end_line": 141,
+          "is_async": false,
+          "is_generator": false
+        }
+      ],
+      "parsedAt": 1769587677204
+    },
+    "frontend/tests/vitest/common/albums.test.js": {
+      "path": "frontend/tests/vitest/common/albums.test.js",
+      "contentHash": "0a54f6c91c569f394b7feb046256ec5a",
+      "mtime": 1762642875924.8708,
+      "functions": [
+        {
+          "name": "album",
+          "signature": "function album(title, uid)",
+          "parameters": "(title, uid)",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 4,
+          "end_line": 6,
+          "is_async": false,
+          "is_generator": false
+        }
+      ],
+      "parsedAt": 1769587733510
+    },
+    "frontend/tests/vitest/common/config.test.js": {
+      "path": "frontend/tests/vitest/common/config.test.js",
+      "contentHash": "165e7fab43b8dc6b09b52d655a8580c9",
+      "mtime": 1762642875924.8708,
+      "functions": [
+        {
+          "name": "createTestConfig",
+          "signature": "const createTestConfig = () =>",
+          "parameters": "()",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 9,
+          "end_line": 12,
+          "is_async": false,
+          "is_generator": false
+        }
+      ],
+      "parsedAt": 1769587733510
+    },
+    "frontend/tests/vitest/component/location/input.test.js": {
+      "path": "frontend/tests/vitest/component/location/input.test.js",
+      "contentHash": "4760e68615e438e39404d40266ffc0d5",
+      "mtime": 1762642875924.8708,
+      "functions": [
+        {
+          "name": "createWrapper",
+          "signature": "const createWrapper = (props = {}) =>",
+          "parameters": "(props = {})",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 38,
+          "end_line": 42,
+          "is_async": false,
+          "is_generator": false
+        }
+      ],
+      "parsedAt": 1769587733510
+    },
+    "frontend/tests/vitest/fixtures.js": {
+      "path": "frontend/tests/vitest/fixtures.js",
+      "contentHash": "878fa3f1ba44456bffddea65c5d8f091",
+      "mtime": 1762642875924.8708,
+      "functions": [
+        {
+          "name": "setupMarkerMocks",
+          "signature": "function setupMarkerMocks()",
+          "parameters": "()",
+          "return_type": null,
+          "docstring": null,
+          "decorators": [],
+          "start_line": 35,
+          "end_line": 41,
+          "is_async": false,
+          "is_generator": false
+        }
+      ],
+      "parsedAt": 1769587733510
+    }
+  }
+}

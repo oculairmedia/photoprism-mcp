@@ -1,7 +1,4 @@
 # Multi-stage build for PhotoPrism MCP Server
-
-# Build stage
-# Using latest stable Rust to support Cargo.lock version 4 and edition2024
 FROM rust:latest as builder
 
 WORKDIR /app
@@ -11,21 +8,8 @@ RUN apt-get update && \
     apt-get install -y pkg-config libssl-dev && \
     rm -rf /var/lib/apt/lists/*
 
-# Copy manifests
-COPY Cargo.toml Cargo.lock ./
-
-# Create dummy src to build dependencies
-RUN mkdir src && \
-    echo "fn main() {}" > src/main.rs && \
-    echo "" > src/lib.rs
-
-# Build dependencies (cached layer)
-RUN cargo build --release && \
-    rm -rf src
-
-# Copy actual source code
-COPY src ./src
-COPY tests ./tests
+# Copy everything at once
+COPY . .
 
 # Build the application
 RUN cargo build --release
@@ -35,20 +19,23 @@ FROM debian:bookworm-slim
 
 # Install runtime dependencies
 RUN apt-get update && \
-    apt-get install -y ca-certificates && \
+    apt-get install -y ca-certificates libssl3 curl && \
     rm -rf /var/lib/apt/lists/*
 
 # Copy binary from builder
-COPY --from=builder /app/target/release/photoprism-mcp /usr/local/bin/
+COPY --from=builder /app/target/release/photoprism-mcp /usr/local/bin/photoprism-mcp
 
-# Set environment variables with defaults
-ENV PHOTOPRISM_URL=http://localhost:2342
-ENV PHOTOPRISM_USERNAME=admin
-ENV TRANSPORT=stdio
+# Copy entrypoint script
+COPY docker-entrypoint.sh /usr/local/bin/
 
-# Create non-root user
-RUN useradd -m -u 1000 photoprism-mcp
+# Make executables
+RUN chmod +x /usr/local/bin/photoprism-mcp && \
+    chmod +x /usr/local/bin/docker-entrypoint.sh
 
-USER photoprism-mcp
+# Set environment defaults
+ENV PHOTOPRISM_URL=http://localhost:2342 \
+    PHOTOPRISM_USERNAME=admin \
+    TRANSPORT=stdio
 
-ENTRYPOINT ["/usr/local/bin/photoprism-mcp"]
+# Run via entrypoint (uses exec like letta)
+CMD ["/usr/local/bin/docker-entrypoint.sh"]

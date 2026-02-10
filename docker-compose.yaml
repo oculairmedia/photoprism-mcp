@@ -1,0 +1,35 @@
+services:
+  photoprism-mcp:
+    build:
+      context: ./mcp-server
+      dockerfile: Dockerfile
+    container_name: photoprism-mcp
+    ports:
+      - "3005:3005"
+    environment:
+      - TRANSPORT=http
+      - HTTP_PORT=3005
+      - PHOTOPRISM_URL=${PHOTOPRISM_URL:-http://192.168.50.20:2342}
+      - PHOTOPRISM_USERNAME=${PHOTOPRISM_USERNAME:-admin}
+      - PHOTOPRISM_PASSWORD=${PHOTOPRISM_PASSWORD:-photoprism}
+      - RUST_LOG=info
+    restart: unless-stopped
+    networks:
+      - photoprism-mcp
+    labels:
+      - homepage.group=AI & Automation
+      - homepage.name=PhotoPrism MCP
+      - homepage.icon=si-rust
+      - homepage.href=http://192.168.50.90:3005
+      - homepage.description=PhotoPrism Model Context Protocol server
+    # Health check disabled - MCP endpoint requires specific headers
+    # healthcheck:
+    #   test: ["CMD-SHELL", "curl -f http://localhost:3005/mcp -X GET || exit 1"]
+    #   interval: 30s
+    #   timeout: 10s
+    #   retries: 3
+    #   start_period: 10s
+
+networks:
+  photoprism-mcp:
+    driver: bridge

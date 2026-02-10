@@ -5,15 +5,16 @@ use std::env;
 
 #[tokio::main]
 async fn main() -> Result<()> {
-    // Initialize tracing/logging
-    tracing_subscriber::fmt()
+    // Initialize tracing/logging with explicit stderr and try_init to prevent Docker panics
+    let _ = tracing_subscriber::fmt()
+        .with_writer(std::io::stderr)
         .with_env_filter(
             EnvFilter::try_from_default_env()
                 .unwrap_or_else(|_| EnvFilter::new("info"))
         )
-        .init();
+        .try_init();
 
-    tracing::info!("Starting PhotoPrism MCP Server");
+    eprintln!("Starting PhotoPrism MCP Server");
 
     // Load configuration
     let config = match Config::load() {
@@ -33,7 +34,7 @@ async fn main() -> Result<()> {
         }
     };
 
-    tracing::info!("Connecting to PhotoPrism at: {}", config.base_url);
+    eprintln!("Connecting to PhotoPrism at: {}", config.base_url);
 
     // Create and run server
     let server = PhotoPrismServer::new(config)?;
@@ -45,10 +46,10 @@ async fn main() -> Result<()> {
         "http" => {
             let port = env::var("HTTP_PORT").unwrap_or_else(|_| "3000".to_string());
             let addr = format!("0.0.0.0:{}", port);
-            tracing::info!("🚀 Starting HTTP transport");
-            tracing::info!("📡 Listening on: http://{}", addr);
-            tracing::info!("🔗 Endpoint: http://{}/mcp", addr);
-            tracing::info!("Ready for MCP client connections");
+            eprintln!("🚀 Starting HTTP transport");
+            eprintln!("📡 Listening on: http://{}", addr);
+            eprintln!("🔗 Endpoint: http://{}/mcp", addr);
+            eprintln!("Ready for MCP client connections");
             
             // Use turbomcp_transport streamable HTTP with permissive security for development
             use turbomcp_transport::streamable_http_v2::{StreamableHttpConfigBuilder, run_server};
@@ -67,8 +68,8 @@ async fn main() -> Result<()> {
                 .map_err(|e| anyhow::anyhow!("HTTP server failed: {}", e))?;
         }
         _ => {
-            tracing::info!("🚀 Starting STDIO transport");
-            tracing::info!("Ready for MCP client connections");
+            eprintln!("🚀 Starting STDIO transport");
+            eprintln!("Ready for MCP client connections");
             
             server
                 .run_stdio()

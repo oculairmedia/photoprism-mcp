@@ -24,7 +24,13 @@ impl AlbumTools {
 
         ctx.info(&format!("Found {} albums", albums.len())).await?;
 
-        Ok(serde_json::to_string_pretty(&albums)?)
+        let response = serde_json::json!({
+            "albums": albums,
+            "count": albums.len(),
+            "note": "Limited to 20 albums. Use get_album with specific UID for details."
+        });
+
+        Ok(serde_json::to_string_pretty(&response)?)
     }
 
     /// Get album by UID
